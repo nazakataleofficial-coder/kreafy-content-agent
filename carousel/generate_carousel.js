@@ -138,12 +138,26 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         align-items: flex-start;
         padding: 0 90px;
       }
-      .illustration {
-        width: 260px;
-        height: 260px;
-        object-fit: contain;
-        margin-bottom: 30px;
+      .illustration-wrap {
+        position: relative;
+        margin-bottom: 20px;
         align-self: center;
+      }
+      .illustration-glow {
+        position: absolute;
+        inset: -50px;
+        background: radial-gradient(circle, ${lineColor}33 0%, transparent 70%);
+        filter: blur(30px);
+        z-index: 0;
+      }
+      .illustration {
+        position: relative;
+        width: 420px;
+        height: auto;
+        object-fit: contain;
+        z-index: 1;
+        -webkit-mask-image: radial-gradient(ellipse 68% 72% at center, black 55%, transparent 100%);
+        mask-image: radial-gradient(ellipse 68% 72% at center, black 55%, transparent 100%);
       }
       .icon-wrap { margin-bottom: 28px; }
       .kicker {
@@ -211,6 +225,15 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         font-weight: 500;
         letter-spacing: 2px;
       }
+      .save-tag {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: ${lineColor};
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
     </style>
   </head>
   <body>
@@ -221,7 +244,7 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
       <div class="pagenum">${String(slideIndex + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}</div>
     </div>
     <div class="content" style="${showIllustration ? 'align-items: center; text-align: center;' : ''}">
-      ${showIllustration ? `<img class="illustration" src="${illustrationSrc}" />` : ''}
+      ${showIllustration ? `<div class="illustration-wrap"><div class="illustration-glow"></div><img class="illustration" src="${illustrationSrc}" /></div>` : ''}
       ${icon ? `<div class="icon-wrap">${icon}</div>` : ''}
       ${kicker ? `<div class="kicker">${kicker}</div>` : ''}
       <div class="headline">${highlightText(text)}</div>
@@ -233,7 +256,7 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
       <div class="progress">
         ${SLIDE_ORDER.map((_, i) => `<div class="progress-dot ${i === slideIndex ? 'active' : ''}"></div>`).join('')}
       </div>
-      ${slideIndex === 0 ? '<div class="swipe">SWIPE →</div>' : '<div style="width:80px"></div>'}
+      ${slideIndex <= 1 ? '<div class="swipe">SWIPE →</div>' : (isCta ? '<div class="save-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg> SAVE THIS</div>' : '<div style="width:80px"></div>')}
     </div>
   </body>
   </html>

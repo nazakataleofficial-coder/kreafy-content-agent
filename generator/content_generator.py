@@ -59,10 +59,13 @@ translation jaisa mat lage, jaise koi native writer ne khud se likha ho.
 
 CAROUSEL STRUCTURE (ye single image NAHI - minimum 4-slide swipeable carousel hai):
 Har post ke liye "carousel_slides_en" aur "carousel_slides_ur" dono arrays banao, har ek exactly 4 slides, is structure mein:
-1. Slide 1 (HOOK): Punchy hook line, max 10-12 words - real number/scenario ke sath, attention pakadne wala
+1. Slide 1 (HOOK): STRICT max 10 words - 2026 research kehta hai reader sirf 2-3 second dekhta hai, itni lambi hook chalti nahi jitni bhi choti ho utna behtar. Real number/scenario ke sath, attention pakadne wala.
 2. Slide 2 (PROBLEM): 1-2 chhote sentences (max 20-25 words) jo poori problem ki story sunayein - kya hua, kyun masla hai
 3. Slide 3 (SOLUTION): 1-2 chhote sentences (max 20-25 words) jo Kreafy ka solution/result poori tarah samjhayein - specific detail ke sath
-4. Slide 4 (CTA): Clear action ya question, max 10 words
+4. Slide 4 (CTA): Alag-alag type ka CTA rotate karo (algorithm engagement signals ke liye zaroori hai):
+   - Comment-bait question (jaise "Which mistake have you made?") - comments algorithm ko sabse zyada signal dete hain
+   - Ya direct action ("DM 'START' for a free audit")
+   - Kabhi kabhi "Save this for later" wala cue bhi add karo (2026 mein saves sabse bada engagement signal hain, likes se zyada)
 
 Zaroori: Ye 4 slides mil ke ek chhoti si complete story honi chahiye - koi bhi in 4 slides ko padh ke poori
 baat samajh jaye, bina caption padhe. Real detail/numbers/scenario do, generic mat likho.
