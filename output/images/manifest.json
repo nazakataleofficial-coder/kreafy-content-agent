@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-07-12T13:21:42.220Z",
+  "posts": [
+    {
+      "post_index": 1,
+      "service": "Web Development",
+      "slides_en": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/en/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/en/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/en/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/en/slide_4_cta.png"
+      ],
+      "slides_ur": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/ur/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/ur/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/ur/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_1/ur/slide_4_cta.png"
+      ]
+    },
+    {
+      "post_index": 2,
+      "service": "App Development",
+      "slides_en": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/en/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/en/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/en/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/en/slide_4_cta.png"
+      ],
+      "slides_ur": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/ur/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/ur/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/ur/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_2/ur/slide_4_cta.png"
+      ]
+    },
+    {
+      "post_index": 3,
+      "service": "YouTube/TikTok Automation",
+      "slides_en": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/en/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/en/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/en/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/en/slide_4_cta.png"
+      ],
+      "slides_ur": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/ur/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/ur/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/ur/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_3/ur/slide_4_cta.png"
+      ]
+    },
+    {
+      "post_index": 4,
+      "service": "2D/3D Animation",
+      "slides_en": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/en/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/en/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/en/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/en/slide_4_cta.png"
+      ],
+      "slides_ur": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/ur/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/ur/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/ur/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_4/ur/slide_4_cta.png"
+      ]
+    },
+    {
+      "post_index": 5,
+      "service": "AI Automation",
+      "slides_en": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/en/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/en/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/en/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/en/slide_4_cta.png"
+      ],
+      "slides_ur": [
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/ur/slide_1_hook.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/ur/slide_2_problem.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/ur/slide_3_solution.png",
+        "/home/runner/work/kreafy-content-agent/kreafy-content-agent/output/images/post_5/ur/slide_4_cta.png"
+      ]
+    }
+  ]
+}
