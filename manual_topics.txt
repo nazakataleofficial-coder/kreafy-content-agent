@@ -1,0 +1,8 @@
+# Yahan hafte mein ek baar (15-20 min), Reddit manually browse karke jo achi
+# real stories/pain-points milein wo ek line mein paste kar do (# wali lines ignore hoti hain).
+#
+# Example (jaisa humne is chat mein dhoonda tha):
+# Developer quoted 480 hours of work, client's budget was $400, community said that's below minimum wage
+# 3 years, an agency held a client's website hostage over file ownership when he tried to transfer domains
+#
+# Jab bhi naya material mile, purani lines ko rehne do ya hata do - system har run pe pura file padhta hai.
