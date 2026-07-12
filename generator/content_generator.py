@@ -71,10 +71,16 @@ HIGHLIGHT MARKER: Har slide ke text mein EK sabse zaroori word/phrase ko **do as
 (jaise "**$400** mein poora business platform"). Ye word carousel image mein ek colored box mein highlight hoga -
 isliye number, price, ya sabse punchy word ko hi marker do, poore sentence ko nahi.
 
-ILLUSTRATION PROMPT: Har post ke liye "illustration_prompt_en" bhi banao - sirf is post ki story ke mutabiq
-character ki POSE/EXPRESSION/SCENE describe karo (max 15-20 words), jaise: "looking shocked at a giant price
-tag floating beside him" ya "standing confidently with arms crossed, laptop nearby". Character ka design
-(face, hair, clothes) already fixed hai kahin aur - yahan sirf action/emotion likho.
+ILLUSTRATION EMOTION: Har post ke liye "illustration_emotion" field bhi do - is story ke sabse zaroori
+emotion/moment ko in FIXED options mein se EK chuno (bilkul yehi spelling use karo, kuch aur mat likho):
+"shocked", "confident", "thinking", "explaining", "celebrating"
+(story ke hisaab se sabse fit wala chuno - jaise koi bade number/price wali baat ho to "shocked",
+solution/result wala moment ho to "confident" ya "celebrating")
+
+HASHTAGS: Har post ke liye "hashtags" bhi do - ek array of 5 relevant, specific hashtags (generic
+#business #success jaisi weak hashtags NAHI - service-specific aur niche-relevant hon, jaise
+#WebDevelopment #NextJS #StartupTools #AIAutomation #PakistanTech waghera, jo us post ke slot/service
+ke hisaab se badlein). Har platform apni zaroorat ke hisaab se in mein se kuch use karega.
 
 Rules:
 - Har post apne slot ki service pe hi focused rahe, mix mat karo
@@ -82,7 +88,19 @@ Rules:
 - Caption 60-100 words, chhote sentences
 - Output STRICT JSON array format mein do, kuch aur text ya explanation nahi
 
-Output format (sirf ye, kuch aur nahi):
+EXAMPLE (isi quality/style ka target rakho - real number, real detail, koi generic baat nahi):
+{{
+  "slot": 1,
+  "service": "Web Development",
+  "caption_en": "A developer quoted 480 hours of work. Client's budget was $400. Every reply on the thread said the same thing: that's below minimum wage. Real software costs real money. We don't cut corners - we quote fair rates from day one. What's your project actually worth?",
+  "caption_ur": "Ek developer ne 480 ghante ka kaam quote kiya. Client ka budget sirf $400 tha. Har jawab yehi tha: ye minimum wage se bhi kam hai. Hum corners nahi kaatte - din 1 se fair rate dete hain. Tumhare project ki asal keemat kya hai?",
+  "carousel_slides_en": ["A developer quoted **480 hours** of work", "Client's budget was just $400 - the internet said that's below minimum wage", "We quote fair, real rates from day one - no lowball surprises later", "What's your project actually worth?"],
+  "carousel_slides_ur": ["Developer ne **480 ghante** ka kaam quote kiya", "Client ka budget sirf $400 tha - internet ne kaha ye minimum wage se kam hai", "Hum din 1 se fair rate dete hain - baad mein surprise nahi", "Tumhare project ki keemat kya hai?"],
+  "illustration_emotion": "shocked",
+  "hashtags": ["#WebDevelopment", "#FreelanceRates", "#TechPricing", "#StartupTools", "#PakistanTech"]
+}}
+
+Output format (upar wale example jaisi hi quality, sirf ye JSON, kuch aur text nahi):
 [
   {{
     "slot": 1,
@@ -91,7 +109,7 @@ Output format (sirf ye, kuch aur nahi):
     "caption_ur": "Roman Urdu caption for Facebook...",
     "carousel_slides_en": ["hook with **highlight**", "problem sentence", "solution sentence", "CTA"],
     "carousel_slides_ur": ["hook with **highlight**", "problem sentence", "solution sentence", "CTA"],
-    "illustration_prompt_en": "short pose/expression/scene description for this story"
+    "illustration_emotion": "shocked"
   }},
   ...
 ]

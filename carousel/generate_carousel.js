@@ -4,9 +4,10 @@
  * ke dono language versions (EN + UR) banata hai, hook slide par story-relevant
  * fixed-character illustration bhi composite karta hai.
  *
- * Design: dark premium palette (per-slide color variety) + editorial serif
- * typography + highlighted keyword boxes. Rang/style change karna ho to
- * SLIDE_STYLES aur CSS badlo.
+ * Design: bold high-contrast single-accent-per-post theme (rotates daily from
+ * THEMES array) + Archivo Black high-impact hook headline + Fraunces bold serif
+ * for body slides + keyword highlight boxes. Colors/fonts change karne ho to
+ * THEMES aur font-family CSS badlo.
  */
 
 const puppeteer = require('puppeteer');
@@ -16,13 +17,27 @@ const path = require('path');
 const OUTPUT_DIR = path.join(__dirname, '..', 'output', 'images');
 const POSTS_JSON = path.join(__dirname, '..', 'output', 'daily_posts.json');
 
-// Har slide type ka apna visual treatment - icon + kicker label + editorial typography
-// Design: dark luxury (deep emerald/gold/ivory), serif display font for punch, sans for labels
+// Har post ka apna EK accent theme hota hai (poore carousel mein consistent) -
+// roz alag theme rotate hota hai taake variety rahe, lekin ek carousel ke andar
+// cohesive/bold single-color-punch look bane (jaisa high-attention agency content)
+const THEMES = [
+  { name: 'crimson', bgGradient: 'linear-gradient(155deg, #1A0A0A 0%, #0A0A0A 65%)', accent: '#E8453F' },
+  { name: 'gold', bgGradient: 'linear-gradient(155deg, #1A1610 0%, #0A0A0A 65%)', accent: '#D4AF37' },
+  { name: 'emerald', bgGradient: 'linear-gradient(155deg, #0B1F17 0%, #0A0F0D 65%)', accent: '#C8A96B' },
+  { name: 'violet', bgGradient: 'linear-gradient(155deg, #150F1F 0%, #0A0A0A 65%)', accent: '#9D6FFF' },
+  { name: 'ice', bgGradient: 'linear-gradient(155deg, #0A1420 0%, #0A0A0A 65%)', accent: '#4FC3F7' },
+];
+
+function getTheme(postIndex) {
+  return THEMES[postIndex % THEMES.length];
+}
+
+// Icons ab function hain (accent color dynamically inject hota hai, theme ke hisaab se)
 const SLIDE_ICONS = {
-  hook: '',
-  problem: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C8A96B" stroke-width="1.6"><path d="M12 2 L22 20 H2 Z" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="#C8A96B"/></svg>`,
-  solution: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C8A96B" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5 L10.5 15.5 L16.5 8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  cta: `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#26150A" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  hook: () => '',
+  problem: (accent) => `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="1.8"><path d="M12 2 L22 20 H2 Z" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="${accent}"/></svg>`,
+  solution: (accent) => `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5 L10.5 15.5 L16.5 8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  cta: (accent) => `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 };
 
 const SLIDE_KICKERS = {
@@ -32,22 +47,21 @@ const SLIDE_KICKERS = {
   cta: 'NEXT STEP',
 };
 
-const SLIDE_STYLES = {
-  hook: { bg: 'linear-gradient(155deg, #1A1512 0%, #0D0B09 65%)', fontSize: '68px', textColor: '#F5F1E8' },
-  problem: { bg: 'linear-gradient(155deg, #3A1220 0%, #24090F 65%)', fontSize: '38px', textColor: '#F5F1E8' },
-  solution: { bg: 'linear-gradient(155deg, #0E2E28 0%, #081C18 65%)', fontSize: '38px', textColor: '#F5F1E8' },
-  cta: { bg: '#C8A96B', fontSize: '38px', textColor: '#26150A' },
-};
+// Font sizes per slide - hook bilkul bold/huge (Archivo Black), baaki Fraunces bold serif
+const FONT_SIZE = { hook: '92px', problem: '42px', solution: '42px', cta: '46px' };
 
 const SLIDE_ORDER = ['hook', 'problem', 'solution', 'cta'];
 
-function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustrationPath) {
-  const style = SLIDE_STYLES[slideType];
-  const icon = SLIDE_ICONS[slideType];
-  const kicker = SLIDE_KICKERS[slideType];
+function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustrationPath, theme) {
   const isCta = slideType === 'cta';
-  const lineColor = isCta ? '#26150A' : '#C8A96B';
-  const mutedColor = isCta ? 'rgba(38,21,10,0.55)' : 'rgba(245,241,232,0.5)';
+  // Non-CTA slides: near-black bg + accent color pops. CTA slide: solid accent bg (inverted, loud stop-scroll moment)
+  const bg = isCta ? theme.accent : theme.bgGradient;
+  const textColor = isCta ? '#0A0A0A' : '#F5F5F5';
+  const lineColor = isCta ? '#0A0A0A' : theme.accent;
+  const mutedColor = isCta ? 'rgba(10,10,10,0.5)' : 'rgba(245,245,245,0.45)';
+  const icon = SLIDE_ICONS[slideType](lineColor);
+  const kicker = SLIDE_KICKERS[slideType];
+  const fontSize = FONT_SIZE[slideType];
   const showIllustration = slideType === 'hook' && illustrationPath && fs.existsSync(illustrationPath);
   // file:// src Puppeteer ke sandboxed setContent() page mein reliably load nahi hota -
   // isliye base64 data URI use karte hain, jo har environment mein guaranteed chalta hai
@@ -60,12 +74,12 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
   <html>
   <head>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,650&family=Manrope:wght@400;500;600;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,650;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Archivo+Black&display=swap');
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
         width: 1080px;
         height: 1350px;
-        background: ${style.bg};
+        background: ${bg};
         font-family: 'Manrope', sans-serif;
         position: relative;
         overflow: hidden;
@@ -74,20 +88,20 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         position: absolute;
         top: 0; right: 0;
         width: 340px; height: 340px;
-        border-left: 1px solid ${isCta ? 'rgba(11,31,23,0.15)' : 'rgba(200,169,107,0.18)'};
-        border-bottom: 1px solid ${isCta ? 'rgba(11,31,23,0.15)' : 'rgba(200,169,107,0.18)'};
+        border-left: 1px solid ${isCta ? 'rgba(10,10,10,0.15)' : 'rgba(255,255,255,0.12)'};
+        border-bottom: 1px solid ${isCta ? 'rgba(10,10,10,0.15)' : 'rgba(255,255,255,0.12)'};
         transform: rotate(45deg) translate(120px, -180px);
       }
       .grid-bg {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background-image: radial-gradient(${isCta ? 'rgba(11,31,23,0.12)' : 'rgba(245,241,232,0.08)'} 1.5px, transparent 1.5px);
+        background-image: radial-gradient(${isCta ? 'rgba(10,10,10,0.12)' : 'rgba(255,255,255,0.06)'} 1.5px, transparent 1.5px);
         background-size: 28px 28px;
       }
       .hl {
-        background: ${isCta ? '#26150A' : '#C8A96B'};
-        color: ${isCta ? '#F5F1E8' : '#0B1F17'};
-        padding: 2px 10px;
+        background: ${lineColor};
+        color: ${isCta ? '#F5F5F5' : '#0A0A0A'};
+        padding: 2px 12px;
         border-radius: 4px;
         display: inline-block;
       }
@@ -109,10 +123,11 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         font-weight: 600;
       }
       .pagenum {
-        color: ${mutedColor};
-        font-size: 15px;
-        font-weight: 500;
-        letter-spacing: 2px;
+        color: ${lineColor};
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        font-family: 'Manrope', sans-serif;
       }
       .content {
         position: absolute;
@@ -139,13 +154,13 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         margin-bottom: 22px;
       }
       .headline {
-        color: ${style.textColor};
-        font-family: 'Fraunces', serif;
-        font-size: ${style.fontSize};
-        font-weight: 600;
-        line-height: 1.25;
-        max-width: 860px;
-        letter-spacing: -0.3px;
+        color: ${textColor};
+        font-family: ${slideType === 'hook' ? "'Archivo Black', sans-serif" : "'Fraunces', serif"};
+        font-size: ${fontSize};
+        font-weight: ${slideType === 'hook' ? 400 : 700};
+        line-height: ${slideType === 'hook' ? 1.05 : 1.3};
+        max-width: 880px;
+        letter-spacing: ${slideType === 'hook' ? '-1px' : '-0.3px'};
       }
       .rule {
         width: 64px; height: 4px;
@@ -158,12 +173,13 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         display: inline-flex;
         align-items: center;
         gap: 14px;
-        background: #26150A;
-        color: #F5F1E8;
+        background: #0A0A0A;
+        color: #F5F5F5;
         padding: 18px 32px;
         border-radius: 100px;
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 700;
+        font-family: 'Manrope', sans-serif;
       }
       .bottombar {
         position: absolute;
@@ -210,7 +226,7 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
       ${kicker ? `<div class="kicker">${kicker}</div>` : ''}
       <div class="headline">${highlightText(text)}</div>
       ${slideIndex === 0 && !showIllustration ? '<div class="rule"></div>' : ''}
-      ${isCta ? `<div class="cta-btn">Let's talk ${SLIDE_ICONS.cta}</div>` : ''}
+      ${isCta ? `<div class="cta-btn">Let's talk ${icon}</div>` : ''}
     </div>
     <div class="bottombar">
       <div class="brand">KREAFY.ONLINE</div>
@@ -256,7 +272,8 @@ async function generateImages() {
     const postDir = path.join(OUTPUT_DIR, `post_${i + 1}`);
     if (!fs.existsSync(postDir)) fs.mkdirSync(postDir, { recursive: true });
 
-    const illustrationPath = path.join(__dirname, '..', 'output', 'illustrations', `post_${i + 1}.png`);
+    const illustrationPath = path.join(__dirname, '..', 'assets', 'character_poses', `${post.illustration_emotion || 'confident'}.png`);
+    const theme = getTheme(i); // ek post = ek theme, poore carousel mein consistent
 
     const langVariants = {
       en: post.carousel_slides_en || [post.carousel_title || `Post ${i + 1}`, '', '', 'DM us to get started'],
@@ -278,7 +295,12 @@ async function generateImages() {
 
         const page = await browser.newPage();
         await page.setViewport({ width: 1080, height: 1350 }); // 4:5 ratio - IG/LinkedIn carousel standard
-        await page.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPath), { waitUntil: 'networkidle0' });
+        await page.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPath, theme), { waitUntil: 'networkidle0' });
+        // ZAROORI FIX: fonts network se load hoti hain lekin render hone mein thoda time
+        // lagta hai - is wait ke bina kabhi kabhi default plain font screenshot ho jata
+        // tha (Fraunces/Manrope ki jagah). Ye ensure karta hai font pura load ho chuka hai.
+        await page.evaluateHandle('document.fonts.ready');
+        await new Promise((resolve) => setTimeout(resolve, 200)); // chhota safety buffer
 
         const imgPath = path.join(langDir, `slide_${s + 1}_${slideType}.png`);
         await page.screenshot({ path: imgPath });

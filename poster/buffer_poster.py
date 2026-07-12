@@ -1,6 +1,15 @@
 """
 Buffer Poster - daily_posts.json (captions) + GitHub-hosted carousel images
 ko Buffer ke NAYE GraphQL API (api.buffer.com) se queue mein daal deta hai.
+
+ZAROORI 2026 UPDATE: Buffer ne apna purana REST/OAuth developer-apps system
+band kar diya hai naye developers ke liye. Ab sirf GraphQL API hai, jisme:
+1. Auth ek "Personal API Key" se hota hai (Buffer Settings > API se milta hai,
+   purana "create an app" wala tareeqa nahi)
+2. Images ka DIRECT UPLOAD nahi hota - Buffer ko ek PUBLIC IMAGE URL chahiye.
+   Isliye GitHub Actions workflow pehle generated images ko wapis repo mein
+   commit/push karta hai (repo PUBLIC hona chahiye), aur ye script un images
+   ka raw.githubusercontent.com URL bana ke Buffer ko deta hai.
 """
 
 import sys
@@ -13,11 +22,14 @@ from config import config
 
 BUFFER_API_URL = "https://api.buffer.com"
 
+# GitHub Actions khud ye env variable set karta hai (owner/repo)
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
 GITHUB_BRANCH = os.environ.get("GITHUB_REF_NAME", "main")
 
 
 def _local_path_to_public_url(local_path):
+    """Local file path (output/images/...) ko raw.githubusercontent.com public URL mein convert karta hai.
+    Zaroori: repo PUBLIC hona chahiye, warna Buffer ye URL fetch nahi kar payega."""
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     rel_path = os.path.relpath(local_path, repo_root).replace(os.sep, "/")
     return f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}/{GITHUB_BRANCH}/{rel_path}"
@@ -55,6 +67,11 @@ mutation CreatePost($input: CreatePostInput!) {
 
 
 def add_to_buffer(channel_id, text, image_paths=None, service=None):
+    """Ek post ko ek Buffer channel ki queue mein add karta hai (naya GraphQL tareeqa).
+    schedulingType: automatic + mode: addToQueue - matlab Buffer apne set-kiye-hue
+    posting-times schedule mein agli khali slot mein daal dega.
+    'service' (facebook/twitter/linkedin) ke hisaab se platform-specific metadata add karta hai."""
+
     assets = []
     if image_paths:
         for img_path in image_paths:
@@ -67,9 +84,10 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
         "channelId": channel_id,
         "schedulingType": "automatic",
         "mode": "addToQueue",
-        "assets": assets,
+        "assets": assets,  # zaroori field hai, khali array bhi chalega (text-only post ke liye)
     }
 
+    # Facebook ko batana zaroori hai ye normal "post" hai (story/reel nahi)
     if service == "facebook":
         post_input["metadata"] = {"facebook": {"type": "post"}}
 
@@ -84,6 +102,7 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
     return create_result
 
 
+# Kaunse platform pe kaunsi language jayegi
 PLATFORM_LANGUAGE = {
     "linkedin": "en",
     "twitter": "en",
@@ -92,14 +111,44 @@ PLATFORM_LANGUAGE = {
 
 
 def _fit_to_twitter_limit(text, limit=280):
+    """X (Twitter) 280 characters se zyada allow nahi karta - agar caption lambi ho
+    to aakhri poore sentence tak chhota kar deta hai (beech mein se nahi katta)."""
     if len(text) <= limit:
         return text
 
     truncated = text[: limit - 1]
     last_period = truncated.rfind(". ")
-    if last_period > limit * 0.4:
+    if last_period > limit * 0.4:  # kaafi lamba hissa bacha to sentence-boundary pe katno
         return truncated[: last_period + 1]
     return truncated.rstrip() + "…"
+
+
+# Har platform pe kitne hashtags chahiye (LinkedIn zyada helpful, X kam space/relevance)
+HASHTAG_COUNT = {
+    "linkedin": 5,
+    "facebook": 3,
+    "twitter": 2,
+}
+
+
+def _build_final_caption(caption, hashtags, platform):
+    """Caption ke aakhir mein website link + platform ke hisaab se sahi tadaad mein
+    hashtags jod deta hai. Twitter ke liye pehle in dono ki jagah reserve karta hai,
+    phir caption ko us hisaab se fit karta hai - taake kabhi beech mein se na katein."""
+    count = HASHTAG_COUNT.get(platform, 3)
+    tags = hashtags[:count] if hashtags else []
+    tag_line = " ".join(tags)
+    website_line = "🌐 kreafy.online"
+
+    extra_lines = "\n\n".join([line for line in [website_line, tag_line] if line])
+    reserved = len(extra_lines) + 2 if extra_lines else 0  # +2 for the blank line before it
+
+    if platform == "twitter":
+        caption = _fit_to_twitter_limit(caption, limit=280 - reserved)
+
+    if extra_lines:
+        return f"{caption}\n\n{extra_lines}"
+    return caption
 
 
 def post_all_daily_content():
@@ -125,12 +174,12 @@ def post_all_daily_content():
 
         for platform, channel_id in config.BUFFER_PROFILE_IDS.items():
             if not channel_id:
-                continue
+                continue  # is platform ki channel_id set nahi, skip
 
             lang = PLATFORM_LANGUAGE.get(platform, "en")
             caption = post.get(f"caption_{lang}", post.get("caption", ""))
-            if platform == "twitter":
-                caption = _fit_to_twitter_limit(caption)
+            hashtags = post.get("hashtags", [])
+            caption = _build_final_caption(caption, hashtags, platform)
             image_paths = post_manifest.get(f"slides_{lang}", [])
 
             try:
@@ -142,6 +191,8 @@ def post_all_daily_content():
                 fail_count += 1
 
     print(f"\nDone. Success: {success_count}, Failed: {fail_count}")
+    print("Yaad rakho: pehli baar chalane ke baad Buffer/LinkedIn pe khud check karo ke")
+    print("carousel sahi se saari slides ke sath bani hai ya nahi (README ka test step dekho).")
 
 
 if __name__ == "__main__":
