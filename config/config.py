@@ -57,7 +57,9 @@ ANTHROPIC_MODEL = "claude-sonnet-4-6"
 
 # Free backup (agar Anthropic credits/subscription na ho)
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-GEMINI_MODEL = "gemini-2.5-pro"
+# Zaroori: gemini-2.5-pro April 2026 se free tier mein NAHI hai (paid-only ho gaya).
+# Flash model free tier mein generous hai (1500 requests/day) - isliye yehi use karo.
+GEMINI_MODEL = "gemini-2.5-flash"
 
 # Kaunsa engine pehle try ho - "claude" ya "gemini"
 PRIMARY_ENGINE = os.environ.get("PRIMARY_ENGINE", "gemini")  # gemini free hai, default rakha
