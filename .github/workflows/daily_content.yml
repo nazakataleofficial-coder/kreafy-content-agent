@@ -1,0 +1,85 @@
+name: Kreafy Daily Content Agent
+
+on:
+  schedule:
+    # Roz Pakistan time subah 8 baje (UTC 03:00 = PKT 08:00)
+    - cron: "0 3 * * *"
+  workflow_dispatch: {}  # manually bhi "Run workflow" button se chala sakte ho testing ke liye
+
+permissions:
+  contents: write  # zaroori hai taake workflow generated images wapis repo mein push kar sake
+
+jobs:
+  generate-and-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo checkout karo
+        uses: actions/checkout@v4
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Node setup (Puppeteer ke liye)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Python dependencies install karo
+        run: pip install -r requirements.txt
+
+      - name: Node dependencies install karo
+        run: |
+          cd carousel
+          npm install puppeteer
+
+      - name: Step 1 - Topics collect karo (Google Trends automated + Weekly Topics Doc/manual_topics.txt)
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_TOPICS_DOC_ID: "162fofOuGsVnnI9SPMkG9rU82-ph5T4mXSjzuZOpx5-4"
+        run: python scraper/topic_scraper.py
+
+      - name: Step 2 - Content generate karo (5 posts)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PRIMARY_ENGINE: gemini
+          POSTS_PER_DAY: 5
+        run: python generator/content_generator.py
+
+      - name: Step 2b - Story character illustrations banao (Gemini free image-gen)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python generator/illustration_generator.py
+
+      - name: Step 3 - Carousel images generate karo
+        env:
+          BRAND_NAME: "Kreafy Digital"
+        run: |
+          cd carousel
+          node generate_carousel.js
+
+      - name: Step 3b - Images repo mein commit/push karo (Buffer ko public URL chahiye)
+        run: |
+          git config user.name "Kreafy Content Bot"
+          git config user.email "bot@kreafy.online"
+          git add output/images output/illustrations
+          git commit -m "chore: daily generated images $(date -u +%Y-%m-%d)" || echo "Koi naya image nahi, commit skip"
+          git push
+
+      - name: Step 4 - Buffer queue mein daal do (zero manual click)
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+          BUFFER_LINKEDIN_ID: ${{ secrets.BUFFER_LINKEDIN_ID }}
+          BUFFER_FACEBOOK_ID: ${{ secrets.BUFFER_FACEBOOK_ID }}
+          BUFFER_TWITTER_ID: ${{ secrets.BUFFER_TWITTER_ID }}
+        run: python poster/buffer_poster.py
+
+      - name: Output files ko workflow artifact mein save karo (backup/review ke liye)
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-content-${{ github.run_number }}
+          path: output/
+          retention-days: 30
