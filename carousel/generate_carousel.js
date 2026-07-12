@@ -35,9 +35,9 @@ function getTheme(postIndex) {
 // Icons ab function hain (accent color dynamically inject hota hai, theme ke hisaab se)
 const SLIDE_ICONS = {
   hook: () => '',
-  problem: (accent) => `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="1.8"><path d="M12 2 L22 20 H2 Z" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="${accent}"/></svg>`,
-  solution: (accent) => `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5 L10.5 15.5 L16.5 8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  cta: (accent) => `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  problem: (accent) => `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="1.8"><path d="M12 2 L22 20 H2 Z" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r="0.6" fill="${accent}"/></svg>`,
+  solution: (accent) => `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5 L10.5 15.5 L16.5 8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  cta: (accent) => `<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="${accent}" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 };
 
 const SLIDE_KICKERS = {
@@ -48,7 +48,7 @@ const SLIDE_KICKERS = {
 };
 
 // Font sizes per slide - hook bilkul bold/huge (Archivo Black), baaki Fraunces bold serif
-const FONT_SIZE = { hook: '92px', problem: '42px', solution: '42px', cta: '46px' };
+const FONT_SIZE = { hook: '92px', problem: '48px', solution: '48px', cta: '52px' };
 
 const SLIDE_ORDER = ['hook', 'problem', 'solution', 'cta'];
 
@@ -95,8 +95,19 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
       .grid-bg {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background-image: radial-gradient(${isCta ? 'rgba(10,10,10,0.12)' : 'rgba(255,255,255,0.06)'} 1.5px, transparent 1.5px);
-        background-size: 28px 28px;
+        background-image:
+          linear-gradient(${isCta ? 'rgba(10,10,10,0.35)' : 'rgba(255,255,255,0.14)'} 1px, transparent 1px),
+          linear-gradient(90deg, ${isCta ? 'rgba(10,10,10,0.35)' : 'rgba(255,255,255,0.14)'} 1px, transparent 1px);
+        background-size: 44px 44px;
+      }
+      .corner-glow {
+        position: absolute;
+        width: 900px; height: 900px;
+        left: -300px; bottom: -300px;
+        background: radial-gradient(circle, ${isCta ? 'rgba(10,10,10,0.9)' : lineColor} 0%, transparent 65%);
+        opacity: ${isCta ? 0.25 : 0.5};
+        filter: blur(10px);
+        mix-blend-mode: ${isCta ? 'multiply' : 'screen'};
       }
       .hl {
         background: ${lineColor};
@@ -143,11 +154,19 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         margin-bottom: 20px;
         align-self: center;
       }
+      .bg-icon {
+        position: absolute;
+        right: -70px; bottom: -70px;
+        opacity: 0.06;
+        transform: rotate(-8deg);
+        z-index: 0;
+      }
+      .bg-icon svg { width: 520px !important; height: 520px !important; }
       .illustration-glow {
         position: absolute;
-        inset: -50px;
-        background: radial-gradient(circle, ${lineColor}33 0%, transparent 70%);
-        filter: blur(30px);
+        inset: -70px;
+        background: radial-gradient(circle, ${lineColor}55 0%, transparent 65%);
+        filter: blur(45px);
         z-index: 0;
       }
       .illustration {
@@ -156,8 +175,8 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         height: auto;
         object-fit: contain;
         z-index: 1;
-        -webkit-mask-image: radial-gradient(ellipse 68% 72% at center, black 55%, transparent 100%);
-        mask-image: radial-gradient(ellipse 68% 72% at center, black 55%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 58% 62% at center, black 35%, transparent 100%);
+        mask-image: radial-gradient(ellipse 58% 62% at center, black 35%, transparent 100%);
       }
       .icon-wrap { margin-bottom: 28px; }
       .kicker {
@@ -238,7 +257,10 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
   </head>
   <body>
     <div class="grid-bg"></div>
+    <div class="corner-glow"></div>
     <div class="diag-accent"></div>
+    ${!isCta && slideType !== 'hook' ? `<div class="bg-icon">${SLIDE_ICONS[slideType](lineColor)}</div>` : ''}
+    ${isCta ? `<div class="bg-icon">${SLIDE_ICONS.cta(lineColor)}</div>` : ''}
     <div class="topbar">
       <div class="mark">K</div>
       <div class="pagenum">${String(slideIndex + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}</div>
