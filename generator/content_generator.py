@@ -48,14 +48,21 @@ HOOK RULES (pehli line, caption ka sabse zaroori hissa - in patterns mein se use
 - "Most business owners don't know..." wala open-loop/curiosity hook
 - Kabhi bhi generic greeting ya "Hi guys" se shuru mat karo
 
-CAPTION STRUCTURE: Hook -> Story/Problem -> Conflict/pain-point -> Twist/Solution -> Strong CTA (DM/comment/link)
+CAPTION STRUCTURE: Har platform ki caption mein bhi (chhoti ho ya lambi) ye poora arc hona chahiye -
+Hook -> Pain point/Story -> Solution -> CTA. Sirf lambai alag hai, structure hamesha wahi.
 
-LANGUAGE OUTPUT RULE (bohot zaroori):
-Har post ke DO versions banao:
-1. "_en" version - Pure English, LinkedIn aur X (Twitter) ke liye. Global/US/UK/ME audience.
-2. "_ur" version - Roman Urdu (Hinglish/Urdu mix), Facebook ke liye. Pakistani local audience.
-Dono versions ka MEANING same rahe, lekin har ek apni language mein naturally likha ho -
-translation jaisa mat lage, jaise koi native writer ne khud se likha ho.
+PLATFORM-SPECIFIC CAPTIONS (bohot zaroori - teeno alag hain, ek jaisi mat likho):
+1. "caption_linkedin" - English, 60-100 words. Professional, detailed story arc (Hook->Pain->Story->Solution->CTA).
+   LinkedIn ka audience global/US/UK/ME hai, thoda detail sahenge.
+2. "caption_facebook" - Roman Urdu (Hinglish/Urdu mix), STRICT 40-50 words. Compressed version -
+   hook + pain point + chhoti story + CTA, lekin sirf 40-50 words mein. Pakistani local audience.
+3. "caption_twitter" - English, STRICT 20-30 words. Bohot tight - hook + pain point + CTA
+   (story wala hissa chhod sakte ho agar jagah na ho, lekin hook-pain-CTA teeno zaroor hon).
+   X/Twitter ka audience bohot jaldi scroll karta hai, isliye ye sabse compressed honi chahiye.
+
+Teeno mein SAME core story/numbers/facts hon (jaisa ek hi ghatna teen alag logon ko teen alag
+lambai mein sunana), sirf lambai aur thoda tone platform ke hisaab se badle - kabhi bhi ek
+ko doosre ka seedha translation mat banao, har ek apni jagah par naturally likhi honi chahiye.
 
 CAROUSEL STRUCTURE (ye single image NAHI - minimum 4-slide swipeable carousel hai):
 Har post ke liye "carousel_slides_en" aur "carousel_slides_ur" dono arrays banao, har ek exactly 4 slides, is structure mein:
@@ -88,15 +95,15 @@ ke hisaab se badlein). Har platform apni zaroorat ke hisaab se in mein se kuch u
 Rules:
 - Har post apne slot ki service pe hi focused rahe, mix mat karo
 - Koi generic "5 tips" wala post NAHI - hamesha specific/concrete, real numbers/scenarios ke sath
-- Caption 60-100 words, chhote sentences
 - Output STRICT JSON array format mein do, kuch aur text ya explanation nahi
 
 EXAMPLE (isi quality/style ka target rakho - real number, real detail, koi generic baat nahi):
 {{
   "slot": 1,
   "service": "Web Development",
-  "caption_en": "A developer quoted 480 hours of work. Client's budget was $400. Every reply on the thread said the same thing: that's below minimum wage. Real software costs real money. We don't cut corners - we quote fair rates from day one. What's your project actually worth?",
-  "caption_ur": "Ek developer ne 480 ghante ka kaam quote kiya. Client ka budget sirf $400 tha. Har jawab yehi tha: ye minimum wage se bhi kam hai. Hum corners nahi kaatte - din 1 se fair rate dete hain. Tumhare project ki asal keemat kya hai?",
+  "caption_linkedin": "A developer quoted 480 hours of work. Client's budget was $400. Every reply on the thread said the same thing: that's below minimum wage. Real software costs real money. We don't cut corners - we quote fair rates from day one. What's your project actually worth?",
+  "caption_facebook": "Ek developer ne 480 ghante ka kaam quote kiya. Client ka budget sirf $400 tha - internet ne kaha ye minimum wage se kam hai. Hum aise corners nahi kaatte. Din 1 se fair rate dete hain. Tumhare project ki asal keemat kya hai?",
+  "caption_twitter": "480 hours quoted. Client offered $400. That's below minimum wage. We quote fair rates from day one. What's your project actually worth?",
   "carousel_slides_en": ["A developer quoted **480 hours** of work", "Client's budget was just $400 - the internet said that's below minimum wage", "We quote fair, real rates from day one - no lowball surprises later", "What's your project actually worth?"],
   "carousel_slides_ur": ["Developer ne **480 ghante** ka kaam quote kiya", "Client ka budget sirf $400 tha - internet ne kaha ye minimum wage se kam hai", "Hum din 1 se fair rate dete hain - baad mein surprise nahi", "Tumhare project ki keemat kya hai?"],
   "illustration_emotion": "shocked",

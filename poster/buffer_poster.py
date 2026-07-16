@@ -176,11 +176,19 @@ def post_all_daily_content():
             if not channel_id:
                 continue  # is platform ki channel_id set nahi, skip
 
-            lang = PLATFORM_LANGUAGE.get(platform, "en")
-            caption = post.get(f"caption_{lang}", post.get("caption", ""))
+            lang = PLATFORM_LANGUAGE.get(platform, "en")  # image assets abhi bhi sirf 2 languages (en/ur) mein bante hain
+            caption = post.get(f"caption_{platform}", post.get(f"caption_{lang}", post.get("caption", "")))
             hashtags = post.get("hashtags", [])
             caption = _build_final_caption(caption, hashtags, platform)
-            image_paths = post_manifest.get(f"slides_{lang}", [])
+
+            # LinkedIn multi-image ko sequential/swipeable dikhata hai - 4-slide carousel sahi hai.
+            # Facebook/X dono multi-image ko grid mein crop kar dete hain (research-confirmed) -
+            # isliye unke liye ek hi cohesive "hero" image bhejte hain.
+            if platform == "linkedin":
+                image_paths = post_manifest.get(f"slides_{lang}", [])
+            else:
+                hero_path = post_manifest.get(f"hero_{lang}")
+                image_paths = [hero_path] if hero_path else []
 
             try:
                 add_to_buffer(channel_id, caption, image_paths, service=platform)
