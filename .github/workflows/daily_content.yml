@@ -109,7 +109,11 @@ jobs:
         run: |
           git config user.name "Kreafy Content Bot"
           git config user.email "bot@kreafy.online"
-          git add output/images output/illustrations output/hottake
+          for dir in output/images output/illustrations output/hottake; do
+            if [ -d "$dir" ]; then
+              git add "$dir"
+            fi
+          done
           git commit -m "chore: daily generated content $(date -u +%Y-%m-%d)" || echo "Koi naya image nahi, commit skip"
           git push
 
