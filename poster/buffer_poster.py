@@ -87,10 +87,6 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
         "assets": assets,  # zaroori field hai, khali array bhi chalega (text-only post ke liye)
     }
 
-    # Facebook ko batana zaroori hai ye normal "post" hai (story/reel nahi)
-    if service == "facebook":
-        post_input["metadata"] = {"facebook": {"type": "post"}}
-
     variables = {"input": post_input}
 
     result = _graphql_request(CREATE_POST_MUTATION, variables)
@@ -102,11 +98,11 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
     return create_result
 
 
-# Kaunse platform pe kaunsi language jayegi
+# Kaunse platform pe kaunsi language jayegi (Facebook hata diya gaya, Instagram add hua)
 PLATFORM_LANGUAGE = {
     "linkedin": "en",
     "twitter": "en",
-    "facebook": "ur",
+    "instagram": "en",
 }
 
 
@@ -126,7 +122,7 @@ def _fit_to_twitter_limit(text, limit=280):
 # Har platform pe kitne hashtags chahiye (LinkedIn zyada helpful, X kam space/relevance)
 HASHTAG_COUNT = {
     "linkedin": 5,
-    "facebook": 3,
+    "instagram": 4,
     "twitter": 2,
 }
 
@@ -149,6 +145,46 @@ def _build_final_caption(caption, hashtags, platform):
     if extra_lines:
         return f"{caption}\n\n{extra_lines}"
     return caption
+
+
+def post_hottake_content(platforms):
+    """Hot-take YA emotional-story - dono single-image formats - isi function se post hote
+    hain (dono output/hottake_post.json + output/hottake/manifest.json use karte hain).
+    'platforms' schedule.json se aata hai (jaise Sunday ko LinkedIn skip hota hai)."""
+    hottake_json = os.path.join(config.OUTPUT_DIR, "hottake_post.json")
+    manifest_path = os.path.join(config.OUTPUT_DIR, "hottake", "manifest.json")
+
+    with open(hottake_json, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    post = data.get("post", {})
+
+    with open(manifest_path, "r", encoding="utf-8") as f:
+        manifest = json.load(f)
+
+    success_count = 0
+    fail_count = 0
+
+    for platform in platforms:
+        channel_id = config.BUFFER_PROFILE_IDS.get(platform, "")
+        if not channel_id:
+            print(f"[SKIP] {platform}: channel ID set nahi hai")
+            continue
+
+        # Twitter ko 16:9 wide image chahiye, baaki (LinkedIn/Instagram) ko 4:5 vertical
+        image_path = manifest.get("twitter_image") if platform == "twitter" else manifest.get("main_image")
+        caption = post.get(f"caption_{platform}", post.get("caption_linkedin", ""))
+        hashtags = post.get("hashtags", [])
+        caption = _build_final_caption(caption, hashtags, platform)
+
+        try:
+            add_to_buffer(channel_id, caption, [image_path] if image_path else [], service=platform)
+            print(f"[OK] Hot-take/emotional post -> {platform} queue mein add ho gayi")
+            success_count += 1
+        except Exception as e:
+            print(f"[FAIL] Hot-take/emotional post -> {platform}: {e}")
+            fail_count += 1
+
+    print(f"\nDone. Success: {success_count}, Failed: {fail_count}")
 
 
 def post_all_daily_content():
@@ -181,14 +217,14 @@ def post_all_daily_content():
             hashtags = post.get("hashtags", [])
             caption = _build_final_caption(caption, hashtags, platform)
 
-            # LinkedIn multi-image ko sequential/swipeable dikhata hai - 4-slide carousel sahi hai.
-            # Facebook/X dono multi-image ko grid mein crop kar dete hain (research-confirmed) -
-            # isliye unke liye ek hi cohesive "hero" image bhejte hain.
-            if platform == "linkedin":
-                image_paths = post_manifest.get(f"slides_{lang}", [])
+            # LinkedIn aur Instagram dono multi-image ko sequential/swipeable dikhate hain -
+            # poora 4-slide carousel dono ko jata hai. Twitter grid mein crop kar deta hai,
+            # isliye sirf pehli (hook) slide ek single image ki tarah bhejte hain.
+            slides = post_manifest.get(f"slides_{lang}", [])
+            if platform == "twitter":
+                image_paths = slides[:1] if slides else []
             else:
-                hero_path = post_manifest.get(f"hero_{lang}")
-                image_paths = [hero_path] if hero_path else []
+                image_paths = slides
 
             try:
                 add_to_buffer(channel_id, caption, image_paths, service=platform)
@@ -204,4 +240,13 @@ def post_all_daily_content():
 
 
 if __name__ == "__main__":
-    post_all_daily_content()
+    schedule_path = os.path.join(config.OUTPUT_DIR, "schedule.json")
+    with open(schedule_path, "r", encoding="utf-8") as f:
+        schedule = json.load(f)
+
+    if schedule.get("run_carousel"):
+        post_all_daily_content()
+    elif schedule.get("run_hottake") or schedule.get("run_emotional"):
+        post_hottake_content(schedule.get("platforms", []))
+    else:
+        print("Schedule mein aaj ke liye koi format enabled nahi - kuch post nahi hua.")

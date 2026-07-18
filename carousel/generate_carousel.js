@@ -62,12 +62,15 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
   const icon = SLIDE_ICONS[slideType](lineColor);
   const kicker = SLIDE_KICKERS[slideType];
   const fontSize = FONT_SIZE[slideType];
-  const showIllustration = slideType === 'hook' && illustrationPath && fs.existsSync(illustrationPath);
-  // file:// src Puppeteer ke sandboxed setContent() page mein reliably load nahi hota -
-  // isliye base64 data URI use karte hain, jo har environment mein guaranteed chalta hai
+  // Hook slide: bigger centered illustration (jaisa pehle tha). Baaki 3 slides (problem/solution/cta):
+  // ab inki bhi apni alag illustration hoti hai, lekin ek soft full-bleed background ki tarah
+  // (blurred/darkened) taake text hamesha crisp/readable rahe - is tarah har slide visually
+  // alag lagti hai (sirf color/text nahi), lekin readability kabhi compromise nahi hoti.
+  const showIllustration = illustrationPath && fs.existsSync(illustrationPath);
   const illustrationSrc = showIllustration
     ? `data:image/png;base64,${fs.readFileSync(illustrationPath).toString('base64')}`
     : '';
+  const isHookLayout = slideType === 'hook';
 
   return `
   <!DOCTYPE html>
@@ -153,6 +156,28 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         position: relative;
         margin-bottom: 20px;
         align-self: center;
+      }
+      .bg-illustration-wrap {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .bg-illustration-img {
+        position: absolute;
+        right: -60px;
+        bottom: -40px;
+        width: 620px;
+        height: auto;
+        opacity: ${isCta ? 0.22 : 0.35};
+        filter: blur(1px) ${isCta ? 'brightness(0.4)' : 'brightness(0.9)'};
+        -webkit-mask-image: linear-gradient(120deg, transparent 0%, black 45%);
+        mask-image: linear-gradient(120deg, transparent 0%, black 45%);
+      }
+      .bg-illustration-fade {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(100deg, ${isCta ? theme.accent : '#0A0A0A'} 0%, ${isCta ? theme.accent : '#0A0A0A'}55 38%, transparent 62%);
       }
       .bg-icon {
         position: absolute;
@@ -259,14 +284,15 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
     <div class="grid-bg"></div>
     <div class="corner-glow"></div>
     <div class="diag-accent"></div>
-    ${!isCta && slideType !== 'hook' ? `<div class="bg-icon">${SLIDE_ICONS[slideType](lineColor)}</div>` : ''}
-    ${isCta ? `<div class="bg-icon">${SLIDE_ICONS.cta(lineColor)}</div>` : ''}
+    ${showIllustration && !isHookLayout ? `<div class="bg-illustration-wrap"><img class="bg-illustration-img" src="${illustrationSrc}" /><div class="bg-illustration-fade"></div></div>` : ''}
+    ${!showIllustration && !isCta && slideType !== 'hook' ? `<div class="bg-icon">${SLIDE_ICONS[slideType](lineColor)}</div>` : ''}
+    ${!showIllustration && isCta ? `<div class="bg-icon">${SLIDE_ICONS.cta(lineColor)}</div>` : ''}
     <div class="topbar">
       <div class="mark">K</div>
       <div class="pagenum">${String(slideIndex + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}</div>
     </div>
-    <div class="content" style="${showIllustration ? 'align-items: center; text-align: center;' : ''}">
-      ${showIllustration ? `<div class="illustration-wrap"><div class="illustration-glow"></div><img class="illustration" src="${illustrationSrc}" /></div>` : ''}
+    <div class="content" style="${showIllustration && isHookLayout ? 'align-items: center; text-align: center;' : ''}">
+      ${showIllustration && isHookLayout ? `<div class="illustration-wrap"><div class="illustration-glow"></div><img class="illustration" src="${illustrationSrc}" /></div>` : ''}
       ${icon ? `<div class="icon-wrap">${icon}</div>` : ''}
       ${kicker ? `<div class="kicker">${kicker}</div>` : ''}
       <div class="headline">${highlightText(text)}</div>
@@ -317,7 +343,14 @@ async function generateImages() {
     const postDir = path.join(OUTPUT_DIR, `post_${i + 1}`);
     if (!fs.existsSync(postDir)) fs.mkdirSync(postDir, { recursive: true });
 
-    const illustrationPath = path.join(__dirname, '..', 'assets', 'character_poses', `${post.illustration_emotion || 'confident'}.png`);
+    const ILLUSTRATIONS_DIR = path.join(__dirname, '..', 'output', 'illustrations');
+    // Har slide ki apni alag illustration file hoti hai ab (illustration_generator.py se) -
+    // agar kisi wajah se na mile (purana run, generation fail), fixed pose pe fallback karta hai.
+    const illustrationPathFor = (slideName) => {
+      const perSlidePath = path.join(ILLUSTRATIONS_DIR, `post_${i + 1}_${slideName}.png`);
+      if (fs.existsSync(perSlidePath)) return perSlidePath;
+      return path.join(__dirname, '..', 'assets', 'character_poses', `${post.illustration_emotion || 'confident'}.png`);
+    };
     const theme = getTheme(i); // ek post = ek theme, poore carousel mein consistent
 
     const langVariants = {
@@ -340,7 +373,7 @@ async function generateImages() {
 
         const page = await browser.newPage();
         await page.setViewport({ width: 1080, height: 1350 }); // 4:5 ratio - IG/LinkedIn carousel standard
-        await page.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPath, theme), { waitUntil: 'networkidle0' });
+        await page.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPathFor(slideType), theme), { waitUntil: 'networkidle0' });
         // ZAROORI FIX: fonts network se load hoti hain lekin render hone mein thoda time
         // lagta hai - is wait ke bina kabhi kabhi default plain font screenshot ho jata
         // tha (Fraunces/Manrope ki jagah). Ye ensure karta hai font pura load ho chuka hai.

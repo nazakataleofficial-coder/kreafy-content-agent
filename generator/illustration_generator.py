@@ -45,7 +45,35 @@ def generate_illustration(prompt, out_path):
     return False
 
 
+SLIDE_NAMES = ["hook", "problem", "solution", "cta"]
+
+# Agar Gemini kisi wajah se fail ho jaye (rate limit, model down, etc.) to carousel
+# kabhi khali/broken na bane - ye fixed poses fallback ke tor pe use hote hain.
+FALLBACK_POSES_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "character_poses"
+)
+FALLBACK_POSE_BY_SLIDE = {
+    "hook": "shocked.png",
+    "problem": "thinking.png",
+    "solution": "confident.png",
+    "cta": "explaining.png",
+}
+
+
+def _use_fallback(slide_name, out_path):
+    fallback_path = os.path.join(FALLBACK_POSES_DIR, FALLBACK_POSE_BY_SLIDE.get(slide_name, "confident.png"))
+    if os.path.exists(fallback_path):
+        with open(fallback_path, "rb") as src, open(out_path, "wb") as dst:
+            dst.write(src.read())
+        return True
+    return False
+
+
 def generate_all_illustrations():
+    """Har post ki har slide (hook/problem/solution/cta) ke liye ALAG illustration banata hai
+    (post.illustration_prompts array se, jo content_generator.py ab per-slide scene deta hai).
+    Purane single-illustration format (illustration_prompt_en) ko bhi backward-compat ke
+    tor pe support karta hai (agar kabhi wahi field mil jaye to sirf hook ke liye use hoga)."""
     posts_path = os.path.join(config.OUTPUT_DIR, "daily_posts.json")
     illustrations_dir = os.path.join(config.OUTPUT_DIR, "illustrations")
     os.makedirs(illustrations_dir, exist_ok=True)
@@ -54,27 +82,43 @@ def generate_all_illustrations():
         data = json.load(f)
 
     posts = data.get("posts", [])
+    total_slides = 0
     success_count = 0
+    fallback_count = 0
 
     for i, post in enumerate(posts):
-        prompt = post.get("illustration_prompt_en", "")
-        if not prompt:
-            print(f"[SKIP] Post {i + 1}: koi illustration_prompt_en nahi mila")
-            continue
+        prompts = post.get("illustration_prompts")
+        if not prompts or len(prompts) < 4:
+            legacy = post.get("illustration_prompt_en", "")
+            prompts = [legacy, legacy, legacy, legacy] if legacy else ["", "", "", ""]
 
-        out_path = os.path.join(illustrations_dir, f"post_{i + 1}.png")
-        try:
-            ok = generate_illustration(prompt, out_path)
-            if ok:
-                print(f"[OK] Post {i + 1} illustration ban gayi: {out_path}")
-                success_count += 1
-            else:
-                print(f"[FAIL] Post {i + 1}: model se image nahi mili")
-        except Exception as e:
-            print(f"[FAIL] Post {i + 1}: {e}")
+        for slide_idx, slide_name in enumerate(SLIDE_NAMES):
+            prompt = prompts[slide_idx] if slide_idx < len(prompts) else ""
+            out_path = os.path.join(illustrations_dir, f"post_{i + 1}_{slide_name}.png")
+            total_slides += 1
 
-    print(f"\nTotal {success_count}/{len(posts)} illustrations ban gayeen.")
-    print("Agar sab fail huye ho, GEMINI_IMAGE_MODEL ka naam check karo is file mein.")
+            if not prompt:
+                print(f"[FALLBACK] Post {i + 1} ({slide_name}): koi prompt nahi mila, fixed pose use ho rahi hai")
+                if _use_fallback(slide_name, out_path):
+                    fallback_count += 1
+                continue
+
+            try:
+                ok = generate_illustration(prompt, out_path)
+                if ok:
+                    print(f"[OK] Post {i + 1} ({slide_name}) illustration ban gayi: {out_path}")
+                    success_count += 1
+                else:
+                    print(f"[FAIL->FALLBACK] Post {i + 1} ({slide_name}): model se image nahi mili, fixed pose use ho rahi hai")
+                    if _use_fallback(slide_name, out_path):
+                        fallback_count += 1
+            except Exception as e:
+                print(f"[FAIL->FALLBACK] Post {i + 1} ({slide_name}): {e}")
+                if _use_fallback(slide_name, out_path):
+                    fallback_count += 1
+
+    print(f"\nTotal {total_slides} slide-illustrations chahiye thi -> {success_count} AI-generated, {fallback_count} fallback pose se.")
+    print("Agar zyadatar fallback ho rahi hain, GEMINI_IMAGE_MODEL ka naam check karo is file mein.")
 
 
 if __name__ == "__main__":

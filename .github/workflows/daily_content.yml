@@ -35,13 +35,21 @@ jobs:
           cd carousel
           npm install puppeteer
 
-      - name: Step 1 - Topics collect karo (Google Trends automated + Weekly Topics Doc/manual_topics.txt)
+      - name: Step 0 - Aaj ka schedule decide karo (carousel/hot-take/emotional/platforms)
+        id: schedule
+        run: python scheduler.py
+
+      # ---------- CAROUSEL PATH (Mon/Wed/Sat + odd-week Thu) ----------
+
+      - name: "Step 1 [Carousel] - Topics collect karo"
+        if: steps.schedule.outputs.run_carousel == 'true'
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_TOPICS_DOC_ID: "162fofOuGsVnnI9SPMkG9rU82-ph5T4mXSjzuZOpx5-4"
         run: python scraper/topic_scraper.py
 
-      - name: Step 2 - Content generate karo (5 posts)
+      - name: "Step 2 [Carousel] - Content generate karo (5 posts)"
+        if: steps.schedule.outputs.run_carousel == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -49,32 +57,68 @@ jobs:
           POSTS_PER_DAY: 5
         run: python generator/content_generator.py
 
-      - name: Step 2b - Story character illustrations banao (Gemini free image-gen)
+      - name: "Step 2b [Carousel] - Har slide ki AI illustration banao (Gemini free image-gen)"
+        if: steps.schedule.outputs.run_carousel == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python generator/illustration_generator.py
 
-      - name: Step 3 - Carousel images generate karo
+      - name: "Step 3 [Carousel] - Carousel images generate karo"
+        if: steps.schedule.outputs.run_carousel == 'true'
         env:
           BRAND_NAME: "Kreafy Digital"
         run: |
           cd carousel
           node generate_carousel.js
 
-      - name: Step 3b - Images repo mein commit/push karo (Buffer ko public URL chahiye)
+      # ---------- HOT-TAKE PATH (Tue/Fri/Sun) ----------
+
+      - name: "Step 1 [Hot-take] - Hot-take post generate karo (real-photo opinion post)"
+        if: steps.schedule.outputs.run_hottake == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PRIMARY_ENGINE: gemini
+        run: python generator/hottake_generator.py
+
+      - name: "Step 2 [Hot-take] - Real-photo image banao (bold overlay caption)"
+        if: steps.schedule.outputs.run_hottake == 'true'
+        run: |
+          cd carousel
+          node generate_hottake.js
+
+      # ---------- EMOTIONAL-STORY PATH (bi-weekly Thursday) ----------
+
+      - name: "Step 1 [Emotional] - Emotional/family-angle post generate karo"
+        if: steps.schedule.outputs.run_emotional == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PRIMARY_ENGINE: gemini
+        run: python generator/emotional_story_generator.py
+
+      - name: "Step 2 [Emotional] - Warm-mood photo image banao"
+        if: steps.schedule.outputs.run_emotional == 'true'
+        run: |
+          cd carousel
+          node generate_hottake.js
+
+      # ---------- COMMON: push images + post to Buffer ----------
+
+      - name: Images repo mein commit/push karo (Buffer ko public URL chahiye)
         run: |
           git config user.name "Kreafy Content Bot"
           git config user.email "bot@kreafy.online"
-          git add output/images output/illustrations
-          git commit -m "chore: daily generated images $(date -u +%Y-%m-%d)" || echo "Koi naya image nahi, commit skip"
+          git add output/images output/illustrations output/hottake
+          git commit -m "chore: daily generated content $(date -u +%Y-%m-%d)" || echo "Koi naya image nahi, commit skip"
           git push
 
-      - name: Step 4 - Buffer queue mein daal do (zero manual click)
+      - name: Buffer queue mein daal do (zero manual click)
         env:
           BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
           BUFFER_LINKEDIN_ID: ${{ secrets.BUFFER_LINKEDIN_ID }}
-          BUFFER_FACEBOOK_ID: ${{ secrets.BUFFER_FACEBOOK_ID }}
           BUFFER_TWITTER_ID: ${{ secrets.BUFFER_TWITTER_ID }}
+          BUFFER_INSTAGRAM_ID: ${{ secrets.BUFFER_INSTAGRAM_ID }}
         run: python poster/buffer_poster.py
 
       - name: Output files ko workflow artifact mein save karo (backup/review ke liye)

@@ -54,8 +54,10 @@ Hook -> Pain point/Story -> Solution -> CTA. Sirf lambai alag hai, structure ham
 PLATFORM-SPECIFIC CAPTIONS (bohot zaroori - teeno alag hain, ek jaisi mat likho):
 1. "caption_linkedin" - English, 60-100 words. Professional, detailed story arc (Hook->Pain->Story->Solution->CTA).
    LinkedIn ka audience global/US/UK/ME hai, thoda detail sahenge.
-2. "caption_facebook" - Roman Urdu (Hinglish/Urdu mix), STRICT 40-50 words. Compressed version -
-   hook + pain point + chhoti story + CTA, lekin sirf 40-50 words mein. Pakistani local audience.
+2. "caption_instagram" - English, STRICT max 60 words. Chhota punchy version - 1-2 line hook/insight,
+   phir short CTA ("Save this" / "Comment below"). Instagram caption "...more" ke peeche chhup jati hai
+   isliye zyada lamba likhna bekaar hai - carousel slides khud hi poori story sunati hain, caption sirf
+   ek chhota teaser + engagement-CTA ho.
 3. "caption_twitter" - English, STRICT 20-30 words. Bohot tight - hook + pain point + CTA
    (story wala hissa chhod sakte ho agar jagah na ho, lekin hook-pain-CTA teeno zaroor hon).
    X/Twitter ka audience bohot jaldi scroll karta hai, isliye ye sabse compressed honi chahiye.
@@ -87,6 +89,17 @@ emotion/moment ko in FIXED options mein se EK chuno (bilkul yehi spelling use ka
 (story ke hisaab se sabse fit wala chuno - jaise koi bade number/price wali baat ho to "shocked",
 solution/result wala moment ho to "confident" ya "celebrating")
 
+ILLUSTRATION PROMPTS (bohot zaroori - carousel ki har slide ki apni alag illustration banti hai,
+isliye "illustration_prompts" field bhi do - ek array of EXACTLY 4 short English scene-description
+strings, is order mein: [hook_scene, problem_scene, solution_scene, cta_scene].
+Har string sirf ek chhota visual scene/pose/setting describe kare (max 15-20 words), jaise:
+"sitting at a desk looking stressed at a laptop screen showing a low budget number"
+"pointing at a red warning sign on a whiteboard, serious expression"
+"smiling confidently while handing over a tablet showing a finished website"
+"giving a thumbs up directly at the camera, inviting viewer to comment"
+Zaroori: chaaron scenes ek dusre se VISUALLY DIFFERENT hon (alag pose, alag prop, alag body language) -
+warna carousel ki saari slides same lagengi. Koi text/words scene mein mat likho, sirf action/pose/setting.
+
 HASHTAGS: Har post ke liye "hashtags" bhi do - ek array of 5 relevant, specific hashtags (generic
 #business #success jaisi weak hashtags NAHI - service-specific aur niche-relevant hon, jaise
 #WebDevelopment #NextJS #StartupTools #AIAutomation #PakistanTech waghera, jo us post ke slot/service
@@ -102,11 +115,17 @@ EXAMPLE (isi quality/style ka target rakho - real number, real detail, koi gener
   "slot": 1,
   "service": "Web Development",
   "caption_linkedin": "A developer quoted 480 hours of work. Client's budget was $400. Every reply on the thread said the same thing: that's below minimum wage. Real software costs real money. We don't cut corners - we quote fair rates from day one. What's your project actually worth?",
-  "caption_facebook": "Ek developer ne 480 ghante ka kaam quote kiya. Client ka budget sirf $400 tha - internet ne kaha ye minimum wage se kam hai. Hum aise corners nahi kaatte. Din 1 se fair rate dete hain. Tumhare project ki asal keemat kya hai?",
+  "caption_instagram": "A developer quoted 480 hours. The client offered $400. We don't do that math. Fair rates, every time. Save this for your next client call. 👇",
   "caption_twitter": "480 hours quoted. Client offered $400. That's below minimum wage. We quote fair rates from day one. What's your project actually worth?",
   "carousel_slides_en": ["A developer quoted **480 hours** of work", "Client's budget was just $400 - the internet said that's below minimum wage", "We quote fair, real rates from day one - no lowball surprises later", "What's your project actually worth?"],
   "carousel_slides_ur": ["Developer ne **480 ghante** ka kaam quote kiya", "Client ka budget sirf $400 tha - internet ne kaha ye minimum wage se kam hai", "Hum din 1 se fair rate dete hain - baad mein surprise nahi", "Tumhare project ki keemat kya hai?"],
   "illustration_emotion": "shocked",
+  "illustration_prompts": [
+    "staring at a laptop screen in shock, hand on forehead, small red 480 hours label glowing on screen",
+    "pointing worriedly at a shrunken dollar-sign icon floating beside a warning triangle",
+    "confidently holding up a tablet showing a green checkmark and a finished website mockup",
+    "leaning forward with a friendly open-hand gesture, inviting the viewer to reply"
+  ],
   "hashtags": ["#WebDevelopment", "#FreelanceRates", "#TechPricing", "#StartupTools", "#PakistanTech"]
 }}
 
@@ -115,11 +134,14 @@ Output format (upar wale example jaisi hi quality, sirf ye JSON, kuch aur text n
   {{
     "slot": 1,
     "service": "Web Development",
-    "caption_en": "English caption for LinkedIn/X...",
-    "caption_ur": "Roman Urdu caption for Facebook...",
+    "caption_linkedin": "English caption for LinkedIn (60-100 words)...",
+    "caption_instagram": "English short caption for Instagram (max 60 words)...",
+    "caption_twitter": "English short caption for Twitter (20-30 words)...",
     "carousel_slides_en": ["hook with **highlight**", "problem sentence", "solution sentence", "CTA"],
     "carousel_slides_ur": ["hook with **highlight**", "problem sentence", "solution sentence", "CTA"],
-    "illustration_emotion": "shocked"
+    "illustration_emotion": "shocked",
+    "illustration_prompts": ["hook scene", "problem scene", "solution scene", "cta scene"],
+    "hashtags": ["#Tag1", "#Tag2", "#Tag3", "#Tag4", "#Tag5"]
   }},
   ...
 ]

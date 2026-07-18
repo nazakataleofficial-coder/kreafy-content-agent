@@ -42,10 +42,14 @@ GEMINI_MODEL = "gemini-3.5-flash"
 PRIMARY_ENGINE = os.environ.get("PRIMARY_ENGINE", "gemini")
 
 BUFFER_ACCESS_TOKEN = os.environ.get("BUFFER_ACCESS_TOKEN", "")
+# Facebook jaan-bujh kar hata diya gaya hai (high-ticket US/UK/ME audience goal se match
+# nahi karta - FB ka strong audience local/low-ticket hota hai). Agar kabhi Instagram
+# automation ke liye ek silent FB Page bananі pare (Meta ki backend requirement), wo Page
+# kabhi active post nahi karega - is dict mein bhi shamil nahi hai.
 BUFFER_PROFILE_IDS = {
     "linkedin": os.environ.get("BUFFER_LINKEDIN_ID", ""),
-    "facebook": os.environ.get("BUFFER_FACEBOOK_ID", ""),
     "twitter": os.environ.get("BUFFER_TWITTER_ID", ""),
+    "instagram": os.environ.get("BUFFER_INSTAGRAM_ID", ""),
 }
 
 POSTS_PER_DAY = int(os.environ.get("POSTS_PER_DAY", "5"))
