@@ -87,6 +87,11 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
         "assets": assets,  # zaroori field hai, khali array bhi chalega (text-only post ke liye)
     }
 
+    # Instagram ko Buffer ka API explicitly batana zaroori hai ye kis type ka post hai
+    # (post/story/reel) - warna "Invalid post" error deta hai. Hum hamesha normal feed "post" bhejte hain.
+    if service == "instagram":
+        post_input["metadata"] = {"instagram": {"type": "post"}}
+
     variables = {"input": post_input}
 
     result = _graphql_request(CREATE_POST_MUTATION, variables)
