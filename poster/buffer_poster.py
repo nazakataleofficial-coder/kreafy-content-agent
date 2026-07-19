@@ -90,7 +90,7 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
     # Instagram ko Buffer ka API explicitly batana zaroori hai ye kis type ka post hai
     # (post/story/reel) - warna "Invalid post" error deta hai. Hum hamesha normal feed "post" bhejte hain.
     if service == "instagram":
-        post_input["metadata"] = {"instagram": {"type": "post"}}
+        post_input["metadata"] = {"instagram": {"type": "post", "shouldShareToFeed": True}}
 
     variables = {"input": post_input}
 
