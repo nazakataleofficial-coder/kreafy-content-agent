@@ -15,6 +15,7 @@ band kar diya hai naye developers ke liye. Ab sirf GraphQL API hai, jisme:
 import sys
 import os
 import json
+import time
 import requests
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -26,6 +27,12 @@ BUFFER_API_URL = "https://api.buffer.com"
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
 GITHUB_BRANCH = os.environ.get("GITHUB_REF_NAME", "main")
 
+# Retry settings - agar Buffer server slow/down ho to turant crash na ho,
+# 3 dafa koshish karo (increasing wait ke sath) phir hi fail declare karo.
+REQUEST_TIMEOUT_SECONDS = 30
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = 5  # 1st retry: 5s wait, 2nd retry: 10s wait, 3rd: 15s wait
+
 
 def _local_path_to_public_url(local_path):
     """Local file path (output/images/...) ko raw.githubusercontent.com public URL mein convert karta hai.
@@ -36,20 +43,44 @@ def _local_path_to_public_url(local_path):
 
 
 def _graphql_request(query, variables=None):
-    response = requests.post(
-        BUFFER_API_URL,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {config.BUFFER_ACCESS_TOKEN}",
-        },
-        json={"query": query, "variables": variables or {}},
-    )
-    data = response.json()
+    """Buffer ko GraphQL request bhejta hai. Agar network/timeout error aaye
+    (server slow, connection drop, etc.) to MAX_RETRIES dafa dobara koshish karta hai
+    - isse ek chhota si network hiccup poora din ka post miss nahi karti."""
+    last_error = None
 
-    if "errors" in data and data["errors"]:
-        raise RuntimeError(f"Buffer GraphQL error: {data['errors'][0].get('message')}")
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = requests.post(
+                BUFFER_API_URL,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {config.BUFFER_ACCESS_TOKEN}",
+                },
+                json={"query": query, "variables": variables or {}},
+                timeout=REQUEST_TIMEOUT_SECONDS,
+            )
+            data = response.json()
 
-    return data.get("data", {})
+            if "errors" in data and data["errors"]:
+                # Buffer ne khud error bheja (jaise invalid channel, bad input) -
+                # ye retry se theek nahi hoga, isliye turant raise karo, retry mat karo.
+                raise RuntimeError(f"Buffer GraphQL error: {data['errors'][0].get('message')}")
+
+            return data.get("data", {})
+
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            # Sirf network-level issues pe retry karo (server down, timeout, etc.)
+            last_error = e
+            if attempt < MAX_RETRIES:
+                wait_seconds = RETRY_BACKOFF_SECONDS * attempt
+                print(f"⚠️ Buffer request attempt {attempt}/{MAX_RETRIES} fail hui ({e}). {wait_seconds}s wait karke retry kar rahe hain...")
+                time.sleep(wait_seconds)
+            else:
+                print(f"❌ Buffer request {MAX_RETRIES} attempts ke baad bhi fail hui.")
+
+    raise RuntimeError(f"Buffer se connect nahi ho paya {MAX_RETRIES} attempts ke baad: {last_error}")
+
+
 
 
 CREATE_POST_MUTATION = """
@@ -222,14 +253,19 @@ def post_all_daily_content():
             hashtags = post.get("hashtags", [])
             caption = _build_final_caption(caption, hashtags, platform)
 
-            # LinkedIn aur Instagram dono multi-image ko sequential/swipeable dikhate hain -
-            # poora 4-slide carousel dono ko jata hai. Twitter grid mein crop kar deta hai,
-            # isliye sirf pehli (hook) slide ek single image ki tarah bhejte hain.
-            slides = post_manifest.get(f"slides_{lang}", [])
+            # LinkedIn: apna dark/premium theme carousel (poore 4 slides)
+            # Instagram: alag bright-theme carousel (poore 4 slides, LinkedIn se visually alag)
+            #   - agar purana manifest hai (naye fields nahi bane), backward-compatible
+            #     fallback LinkedIn wale slides pe hi ho jata hai, crash nahi hota
+            # Twitter: alag landscape "quote card" (16:9-ish) - portrait crop nahi hoti feed mein
             if platform == "twitter":
-                image_paths = slides[:1] if slides else []
+                twitter_card = post_manifest.get("twitter_card")
+                image_paths = [twitter_card] if twitter_card else post_manifest.get(f"slides_{lang}", [])[:1]
+            elif platform == "instagram":
+                ig_slides = post_manifest.get(f"slides_ig_{lang}")
+                image_paths = ig_slides if ig_slides else post_manifest.get(f"slides_{lang}", [])
             else:
-                image_paths = slides
+                image_paths = post_manifest.get(f"slides_{lang}", [])
 
             try:
                 add_to_buffer(channel_id, caption, image_paths, service=platform)

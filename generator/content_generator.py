@@ -35,8 +35,18 @@ audience nahi chahiye, isliye tone hamesha premium/confident rakho, discount-sel
 LANGUAGE RULE (bohot zaroori):
 - Itni simple wording likho ke ek 7 saal ka bachcha bhi samajh jaye
 - Har sentence chhota rakho (max 8-10 words)
-- Mushkil/heavy English words mat use karo (jaise "leverage", "synergy", "optimize" - inki jagah simple lafz: "use karo", "behtar banao")
+- Mushkil/heavy words mat use karo (jaise "leverage", "synergize", "optimize") - inki jagah simple English words use karo (jaise "use", "improve")
 - Simple hone ka matlab childish nahi - tone hamesha confident aur professional rahe, sirf lafz aasan hon
+
+⚠️ CRITICAL OUTPUT LANGUAGE RULE (ye instruction sabse zyada zaroori hai, kabhi mat todna):
+Ye poora prompt jo tum abhi padh rahe ho Hinglish (Roman Urdu) mein likha hai - ye SIRF
+tumhe samjhane ke liye hai (jaisa ek insaan doosre insaan ko brief deta hai). Lekin jo
+FINAL OUTPUT tum generate karoge (caption_linkedin, caption_instagram, caption_twitter,
+carousel_slides_en fields), wo 100% PURE ENGLISH mein hona chahiye - koi bhi Roman Urdu/
+Hindi ka lafz (jaise "hai", "nahi", "karo", "kya", "bhi", "aur") in English fields mein
+BILKUL nahi aana chahiye. Sirf carousel_slides_ur field (jo alag se hai) Roman Urdu mein
+hoga - baaki sab fields pure clean English mein likho, jaisa koi native English speaker
+LinkedIn/Instagram/Twitter pe post karta hai.
 
 SERVICE ROTATION - har din is exact order mein 5 posts banao, har slot apni service pe focused ho:
 {_build_rotation_block()}
@@ -47,6 +57,19 @@ HOOK RULES (pehli line, caption ka sabse zaroori hissa - in patterns mein se use
 - Direct relatable question jo target client khud se poochta hai
 - "Most business owners don't know..." wala open-loop/curiosity hook
 - Kabhi bhi generic greeting ya "Hi guys" se shuru mat karo
+
+PLATFORM TRUNCATION LIMITS - ye bohot zaroori hai kyunke har platform apna text ALAG
+character count par "...see more" ke peeche chhupata hai. Agar hook is limit ke andar
+khatam nahi hoti (adhoori/awkward jagah se kat jaye), banda click hi nahi karega:
+- LinkedIn: ~140 characters (mobile) mein cut hota hai. Isliye caption_linkedin ki
+  PEHLI SENTENCE standalone aur punchy honi chahiye, max 15-18 words mein, taake
+  wo poori tarah "see more" se pehle dikh jaye aur curiosity chhod jaye.
+- Instagram: ~125 characters mein "...more" aata hai (LinkedIn se bhi tight).
+  Pehli line max 12-15 words, ek self-contained punch honi chahiye.
+- Twitter/X: koi "see more" nahi hota agar limit ke andar hai, LEKIN agar thread
+  bana rahe ho to sirf PEHLA tweet feed mein visible hota hai (baaki thread click
+  karne par khulta hai) - isliye first tweet/line hamesha khud mein complete
+  aur curiosity-driving honi chahiye, kabhi aadhe mein na kate.
 
 CAPTION STRUCTURE: Har platform ki caption mein bhi (chhoti ho ya lambi) ye poora arc hona chahiye -
 Hook -> Pain point/Story -> Solution -> CTA. Sirf lambai alag hai, structure hamesha wahi.

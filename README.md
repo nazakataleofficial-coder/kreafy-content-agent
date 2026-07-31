@@ -75,6 +75,12 @@ Repo → Settings → Secrets and variables → Actions → "New repository secr
 | `BUFFER_FACEBOOK_ID` | Step 2 se |
 | `BUFFER_TWITTER_ID` | Step 2 se |
 | `GOOGLE_SERVICE_ACCOUNT_JSON` | (optional - Step 3 se, Weekly Topics Doc ke liye) |
+| `TG_BOT_TOKEN` | (optional - failure alert ke liye) @BotFather se Telegram bot bana ke milega |
+| `TG_CHAT_ID` | (optional - failure alert ke liye) @userinfobot ko message karke apna chat ID nikaalo |
+
+> **Naya:** Agar `TG_BOT_TOKEN` aur `TG_CHAT_ID` add kar do, to workflow fail hone par turant
+> Telegram par alert message aayega — bina khud GitHub Actions check kiye pata chal jayega ke
+> aaj ka post fail ho gaya. Agar nahi daaloge to bhi sab normal chalega, ye step sirf skip ho jayega.
 
 ### 5. Buffer mein posting times set karo (ek baar ka kaam)
 Buffer app → har channel (LinkedIn/FB/X) → Posting Schedule → 5 time-slots add karo (Pakistan Time):

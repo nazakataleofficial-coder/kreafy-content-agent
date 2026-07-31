@@ -32,6 +32,22 @@ function getTheme(postIndex) {
   return THEMES[postIndex % THEMES.length];
 }
 
+// Instagram ke liye ALAG theme set - IG ka audience zyada bright/bold/high-saturation
+// visuals pe rukta hai (LinkedIn ka muted-dark corporate look IG pe utna nahi chalta).
+// Isi wajah se LinkedIn/Twitter ke liye THEMES (upar) alag hai, Instagram ke liye ye alag hai -
+// dono independently rotate hote hain taake variety bhi mile aur platform-native feel bhi.
+const INSTAGRAM_THEMES = [
+  { name: 'ig-coral', bgGradient: 'linear-gradient(145deg, #2A0A12 0%, #120508 70%)', accent: '#FF4D6D' },
+  { name: 'ig-amber', bgGradient: 'linear-gradient(145deg, #2A1A05 0%, #120A02 70%)', accent: '#FFB020' },
+  { name: 'ig-mint', bgGradient: 'linear-gradient(145deg, #052A1E 0%, #05120C 70%)', accent: '#2DE1B0' },
+  { name: 'ig-violet', bgGradient: 'linear-gradient(145deg, #200A2A 0%, #0F0512 70%)', accent: '#B36BFF' },
+  { name: 'ig-sky', bgGradient: 'linear-gradient(145deg, #051E2A 0%, #050F14 70%)', accent: '#33C1FF' },
+];
+
+function getInstagramTheme(postIndex) {
+  return INSTAGRAM_THEMES[postIndex % INSTAGRAM_THEMES.length];
+}
+
 // Icons ab function hain (accent color dynamically inject hota hai, theme ke hisaab se)
 const SLIDE_ICONS = {
   hook: () => '',
@@ -52,8 +68,10 @@ const FONT_SIZE = { hook: '92px', problem: '48px', solution: '48px', cta: '52px'
 
 const SLIDE_ORDER = ['hook', 'problem', 'solution', 'cta'];
 
-function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustrationPath, theme) {
+function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustrationPath, theme, variant = 'linkedin') {
   const isCta = slideType === 'cta';
+  const isInstagram = variant === 'instagram';
+  const isLandscape = variant === 'twitter_landscape';
   // Non-CTA slides: near-black bg + accent color pops. CTA slide: solid accent bg (inverted, loud stop-scroll moment)
   const bg = isCta ? theme.accent : theme.bgGradient;
   const textColor = isCta ? '#0A0A0A' : '#F5F5F5';
@@ -61,7 +79,15 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
   const mutedColor = isCta ? 'rgba(10,10,10,0.5)' : 'rgba(245,245,245,0.45)';
   const icon = SLIDE_ICONS[slideType](lineColor);
   const kicker = SLIDE_KICKERS[slideType];
-  const fontSize = FONT_SIZE[slideType];
+  // Instagram: mobile-scroll-heavy platform, thoda bigger hook font zyada thumb-stopping hota hai.
+  // Twitter landscape card: canvas wider hai lekin shorter, hook font thoda chhota rakhna padta hai
+  // taake wide-but-short frame mein fit ho jaye.
+  const baseFontSize = FONT_SIZE[slideType];
+  const fontSize = isInstagram && slideType === 'hook' ? '104px'
+    : isLandscape && slideType === 'hook' ? '76px'
+    : baseFontSize;
+  const canvasWidth = isLandscape ? 1600 : 1080;
+  const canvasHeight = isLandscape ? 900 : 1350;
   // Hook slide: bigger centered illustration (jaisa pehle tha). Baaki 3 slides (problem/solution/cta):
   // ab inki bhi apni alag illustration hoti hai, lekin ek soft full-bleed background ki tarah
   // (blurred/darkened) taake text hamesha crisp/readable rahe - is tarah har slide visually
@@ -80,8 +106,8 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
       @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,650;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Archivo+Black&display=swap');
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
-        width: 1080px;
-        height: 1350px;
+        width: ${canvasWidth}px;
+        height: ${canvasHeight}px;
         background: ${bg};
         font-family: 'Manrope', sans-serif;
         position: relative;
@@ -150,7 +176,7 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        padding: 0 90px;
+        padding: ${isLandscape ? '0 100px' : '0 90px'};
       }
       .illustration-wrap {
         position: relative;
@@ -217,7 +243,7 @@ function buildHTML(text, slideType, slideIndex, totalSlides, brandName, illustra
         font-size: ${fontSize};
         font-weight: ${slideType === 'hook' ? 400 : 700};
         line-height: ${slideType === 'hook' ? 1.05 : 1.3};
-        max-width: 880px;
+        max-width: ${isLandscape ? '1150px' : '880px'};
         letter-spacing: ${slideType === 'hook' ? '-1px' : '-0.3px'};
       }
       .rule {
@@ -352,6 +378,7 @@ async function generateImages() {
       return path.join(__dirname, '..', 'assets', 'character_poses', `${post.illustration_emotion || 'confident'}.png`);
     };
     const theme = getTheme(i); // ek post = ek theme, poore carousel mein consistent
+    const igTheme = getInstagramTheme(i); // Instagram ka apna alag bright theme
 
     const langVariants = {
       en: post.carousel_slides_en || [post.carousel_title || `Post ${i + 1}`, '', '', 'DM us to get started'],
@@ -359,42 +386,74 @@ async function generateImages() {
     };
 
     const slidesByLang = {};
+    const igSlidesByLang = {};
 
     for (const lang of Object.keys(langVariants)) {
       const slides = langVariants[lang];
       const langDir = path.join(postDir, lang);
       if (!fs.existsSync(langDir)) fs.mkdirSync(langDir, { recursive: true });
 
+      // Instagram ka apna alag bright-theme folder (LinkedIn wale se visually different -
+      // taake same content, alag "feel" ke sath dono platforms pe native lage)
+      const igLangDir = path.join(postDir, 'ig', lang);
+      if (!fs.existsSync(igLangDir)) fs.mkdirSync(igLangDir, { recursive: true });
+
       const slidePaths = [];
+      const igSlidePaths = [];
 
       for (let s = 0; s < SLIDE_ORDER.length; s++) {
         const slideType = SLIDE_ORDER[s];
         const text = slides[s] || '';
 
+        // --- LinkedIn/Twitter (existing) theme render ---
         const page = await browser.newPage();
-        await page.setViewport({ width: 1080, height: 1350 }); // 4:5 ratio - IG/LinkedIn carousel standard
-        await page.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPathFor(slideType), theme), { waitUntil: 'networkidle0' });
-        // ZAROORI FIX: fonts network se load hoti hain lekin render hone mein thoda time
-        // lagta hai - is wait ke bina kabhi kabhi default plain font screenshot ho jata
-        // tha (Fraunces/Manrope ki jagah). Ye ensure karta hai font pura load ho chuka hai.
+        await page.setViewport({ width: 1080, height: 1350 }); // 4:5 ratio - LinkedIn carousel standard
+        await page.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPathFor(slideType), theme, 'linkedin'), { waitUntil: 'networkidle0' });
         await page.evaluateHandle('document.fonts.ready');
         await new Promise((resolve) => setTimeout(resolve, 200)); // chhota safety buffer
 
         const imgPath = path.join(langDir, `slide_${s + 1}_${slideType}.png`);
         await page.screenshot({ path: imgPath });
         await page.close();
-
         slidePaths.push(imgPath);
+
+        // --- Instagram (naya) bright theme render - same text/structure, alag colors/font-size ---
+        const igPage = await browser.newPage();
+        await igPage.setViewport({ width: 1080, height: 1350 });
+        await igPage.setContent(buildHTML(text, slideType, s, SLIDE_ORDER.length, brandName, illustrationPathFor(slideType), igTheme, 'instagram'), { waitUntil: 'networkidle0' });
+        await igPage.evaluateHandle('document.fonts.ready');
+        await new Promise((resolve) => setTimeout(resolve, 200));
+
+        const igImgPath = path.join(igLangDir, `slide_${s + 1}_${slideType}.png`);
+        await igPage.screenshot({ path: igImgPath });
+        await igPage.close();
+        igSlidePaths.push(igImgPath);
       }
 
       slidesByLang[lang] = slidePaths;
+      igSlidesByLang[lang] = igSlidePaths;
     }
+
+    // --- Twitter/X landscape "quote card" - sirf hook slide, wide 16:9-ish format
+    // taake X ke feed mein crop na ho (portrait slides X pe badly crop hoti hain) ---
+    const twitterHookText = langVariants.en[0] || post.carousel_title || `Post ${i + 1}`;
+    const twPage = await browser.newPage();
+    await twPage.setViewport({ width: 1600, height: 900 });
+    await twPage.setContent(buildHTML(twitterHookText, 'hook', 0, SLIDE_ORDER.length, brandName, illustrationPathFor('hook'), theme, 'twitter_landscape'), { waitUntil: 'networkidle0' });
+    await twPage.evaluateHandle('document.fonts.ready');
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    const twitterCardPath = path.join(postDir, 'twitter_card.png');
+    await twPage.screenshot({ path: twitterCardPath });
+    await twPage.close();
 
     manifest.push({
       post_index: i + 1,
       service: post.service || '',
       slides_en: slidesByLang.en,
       slides_ur: slidesByLang.ur,
+      slides_ig_en: igSlidesByLang.en,
+      slides_ig_ur: igSlidesByLang.ur,
+      twitter_card: twitterCardPath,
     });
 
     console.log(`Post ${i + 1}/${posts.length}: EN + UR carousels generate hui -> ${postDir}`);

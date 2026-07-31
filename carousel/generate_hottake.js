@@ -89,9 +89,19 @@ async function generateHottakeImage() {
   const mood = post.photo_mood || 'confident';
   const captionText = (post.image_caption || 'REAL TALK').toUpperCase();
 
-  const photoPath = path.join(PHOTOS_DIR, `${mood}.png`);
+  let photoPath = path.join(PHOTOS_DIR, `${mood}.png`);
+
+  // Agar is specific mood ki photo abhi upload nahi hui (jaise nayi mood list mein
+  // add ki gayi lekin photo file abhi folder mein nahi daali), to poora pipeline
+  // crash karne ki bajaye "confident.png" (jo hamesha honi chahiye) pe fallback karo.
+  // Isse ek missing photo ki wajah se poora din ka post miss nahi hota.
   if (!fs.existsSync(photoPath)) {
-    console.error(`Photo nahi mili: ${photoPath}. assets/real_photos/ mein 6 mood photos honi chahiye (confident, stern, thoughtful, warm, casual, determined).`);
+    console.warn(`⚠️ Photo nahi mili "${mood}.png" ke liye. Fallback "confident.png" use kar rahe hain.`);
+    photoPath = path.join(PHOTOS_DIR, 'confident.png');
+  }
+
+  if (!fs.existsSync(photoPath)) {
+    console.error(`Photo nahi mili: ${photoPath}. assets/real_photos/ mein kam se kam "confident.png" hona zaroori hai (safe default).`);
     process.exit(1);
   }
   const photoSrc = `data:image/png;base64,${fs.readFileSync(photoPath).toString('base64')}`;
