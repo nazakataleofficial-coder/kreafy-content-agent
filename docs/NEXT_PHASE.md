@@ -37,8 +37,8 @@ The example date/URL are placeholders, not a real new publication. Add `--publis
 
 | Priority | Work | Completion condition |
 |---|---|---|
-| 1 | Audit existing Buffer errors without retrying | Distinguish failed, queued and uncertain entries; identify claim/media issues. Latest inspection loaded 20 error cards, not an exhaustive audit of every entry. No deletion/retry authorized by this plan. |
-| 2 | Connect evidence to qualified leads | Record relevant enquiries, requested service, consultation, paid project and revenue only when observed. No invented zeroes or attributed revenue. |
+| 1 | Audit existing Buffer errors without retrying | Distinguish failed, queued and uncertain entries; identify claim/media issues. Completed read-only audit of all 95 cards: 91 failed, four scheduled. See BUFFER_AUDIT.md. No deletion/retry authorized by this plan. |
+| 2 | Connect evidence to qualified leads | Offline record-lead / lead-scorecard implemented; no real observations seeded. See LEAD_TRACKING.md. Actual enquiries, bookings and received money remain unknown. |
 | 3 | Review the existing 12-topic plan | Choose one audience problem and one useful deliverable per topic; check current sources. Do not recycle the bank as fresh research. |
 | 4 | Fix the renderer to the approved overlay direction | Separate implementation review with existing assets; protect face/head, preserve aspect ratio, and obtain actual platform preview approval. No new poster requested now. |
 | 5 | Validate an existing delivery route | Only an exact approved platform preview and existing authorized connection; verify resulting live URL before calling it published. No new permissions or integrations. |

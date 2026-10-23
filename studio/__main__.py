@@ -15,6 +15,20 @@ def main():
     prepare.add_argument('--start', default=datetime.now(ZoneInfo('Asia/Karachi')).date().isoformat())
     prepare.add_argument('--out', default='studio-output')
     commands.add_parser('inspect-buffer')
+    from studio.leads import SERVICES, STAGES
+    score = commands.add_parser('lead-scorecard')
+    score.add_argument('--journal', default='studio-private/leads.sqlite3')
+    lead = commands.add_parser('record-lead')
+    lead.add_argument('--platform', choices=PLATFORMS, required=True)
+    lead.add_argument('--service', choices=SERVICES, required=True)
+    lead.add_argument('--stage', choices=STAGES, required=True)
+    lead.add_argument('--observed-at', required=True)
+    lead.add_argument('--evidence', choices=('operator_observed', 'user_reported'), required=True)
+    lead.add_argument('--lead-id')
+    lead.add_argument('--post-url')
+    lead.add_argument('--attribution', choices=('unknown', 'direct', 'self_reported'), default='unknown')
+    lead.add_argument('--amount-pkr')
+    lead.add_argument('--journal', default='studio-private/leads.sqlite3')
     status = commands.add_parser('status')
     status.add_argument('--journal', default='studio-private/delivery.sqlite3')
     record = commands.add_parser('record-publication')
@@ -52,6 +66,17 @@ def main():
         from studio.drive import import_images
         imported = import_images(args.folder, args.out)
         print(f'{len(imported)} images imported read-only. No automatic use or sharing.')
+        return
+    if args.command == 'lead-scorecard':
+        from studio.leads import lead_scorecard
+        print(json.dumps(lead_scorecard(args.journal), indent=2))
+        return
+    if args.command == 'record-lead':
+        from studio.leads import record_lead
+        event = record_lead(args.journal, args.platform, args.service, args.stage,
+                            args.observed_at, args.evidence, args.lead_id, args.post_url,
+                            args.attribution, args.amount_pkr)
+        print(json.dumps(event, indent=2))
         return
     if args.command == 'status':
         from studio.publications import publication_status

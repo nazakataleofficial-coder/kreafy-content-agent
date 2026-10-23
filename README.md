@@ -15,6 +15,10 @@ python -m studio status
 
 Status is offline: it reads recorded evidence and optional local delivery receipts, without refreshing analytics. Historical posts have no manifest fingerprint and are not automatically deduplicated. Future native publications can be reconciled against an approved manifest using `record-publication`; see the plan. Nothing is sent by either command.
 
+## Queue audit and qualified leads
+
+The [complete 95-entry Buffer audit](docs/BUFFER_AUDIT.md) found 91 errors and four scheduled entries with unverified claims. No queue item was changed. See the [private lead tracking workflow](docs/LEAD_TRACKING.md) for the new offline `record-lead` and `lead-scorecard` commands. No leads or revenue have been invented or imported.
+
 ## Current workflow
 
 The proposed replacement daily workflow prepares unpublished campaign previews on
