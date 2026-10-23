@@ -1,0 +1,684 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-23T21:19:43.758Z",
+  "source_url": "https://publish.buffer.com/schedule",
+  "method": "Authenticated Chrome, all 95 queue card DOM entries loaded and read. No retry, edit, publish or connection refresh.",
+  "total_entries": 95,
+  "errored": 91,
+  "scheduled": 4,
+  "limitations": [
+    "Queue counts include failures; they are not successful future publications.",
+    "Historical authorization errors do not establish the current connection state.",
+    "Captions were visible excerpts, sometimes collapsed; full content/media quality and claim evidence were not verified.",
+    "No original public post URL exists for these unconfirmed queue entries. Buffer IDs are internal identifiers.",
+    "Home shows 20 unanswered comments/mentions, not 20 qualified enquiries. No private messages were inspected."
+  ],
+  "entries": [
+    {
+      "buffer_post_id": "6a66f9c979ae388ebdb38d7a",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Jul 31, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a66f9ca351863828cfe7fec",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Jul 31, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a68410ffbdf65da5414e36f",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 1, 8:07 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6993fc0dc384370e2de819",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 1, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6993fd7b325a1886698e1d",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 2, 9:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6993ff23997da158cfcd82",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 2, 9:17 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6ae2d031c6b0ee115910a6",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 3, 7:05 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6ae2d1b2299d92e6c5de84",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 3, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6ae2d39b11043211d57690",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 4, 5:53 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6ae2d4bf2d4c6e419b169a",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 4, 7:25 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6c39f5a7a516cf4d2dea4c",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 5, 1:26 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6d89f0e4816623867a5952",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 5, 6:45 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6d89f12368e968d93f3e0f",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 6, 8:57 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a6edab3aacd241cfda612e7",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 6, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Instagram flagged this post as potential spam. Please edit the content and try again."
+    },
+    {
+      "buffer_post_id": "6a76ac8eeb086b1202d115ad",
+      "ui_label": "Post errored for nazakat-ale linkedin channel on Aug 8, 1:00 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "linkedin",
+      "error": "There appears to be an issue with the attached media or link attachment. This could be due to the file being too large or connection timing out. Please try removing the media or link attachment and try the post again."
+    },
+    {
+      "buffer_post_id": "6a76ac8f2c3e8e5fce6ea519",
+      "ui_label": "Post errored for Kreafyonline twitter channel on Aug 8, 7:00 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "twitter",
+      "error": "X encountered an error when publishing this post. Please visit our Status Page for the latest updates."
+    },
+    {
+      "buffer_post_id": "6a72ce3cbeaf5fe355577510",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 8, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "Yikes! It looks like we had some trouble sending this post. Please try sending this post again later."
+    },
+    {
+      "buffer_post_id": "6a77fe8e13d01138ced54022",
+      "ui_label": "Post errored for Kreafyonline twitter channel on Aug 9, 11:00 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "twitter",
+      "error": "There appears to be an issue with the attached media or link attachment. This could be due to the file being too large or connection timing out. Please try removing the media or link attachment and try the post again."
+    },
+    {
+      "buffer_post_id": "6a7d4deeedf287b50608d320",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Aug 17, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "There is an issue with the media included. Please remove it and try to upload it again."
+    },
+    {
+      "buffer_post_id": "6a9bc367ca987255f9363a4c",
+      "ui_label": "Post errored for Kreafyonline twitter channel on Sep 5, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "twitter",
+      "error": "An unknown error has occurred. Please retry the post again, and get in touch if this persists."
+    },
+    {
+      "buffer_post_id": "6a9e6db5ffe4128b1f9ebadd",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 10, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "There is an issue with the media included. Please remove it and try to upload it again."
+    },
+    {
+      "buffer_post_id": "6aa5017e1baa612063c3d900",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 17, 8:57 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aa656a3bcabda92e1a87702",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 17, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aa7b0fbd36607a69221e99f",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 18, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aa7b0fdb78fe872efc2d7d2",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 18, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aa8ff282f59d2c210b84384",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 19, 6:25 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aaa502341832705cdae11b0",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 19, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aaa5025a4cd0dee07179f2c",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 20, 9:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aaa5027f1e94c50adc85c34",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 20, 9:17 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aaba25c20de135c2a16c250",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 21, 7:05 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aae3e2004838aa1c45f0ee0",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 21, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aae3e2124705c90449cf72e",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 22, 5:53 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aae3e2324705c90449cf76b",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 22, 7:25 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aae3e2504838aa1c45f0f66",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 23, 1:26 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aae3e2765e5b8cd5b2cd99d",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 23, 6:45 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6aaf9557566e1a89bc2826ba",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 24, 8:57 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab0ebe21cf21ae1b525f8c8",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 24, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab0ebe4b46c37db5205c9e5",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 25, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab0ebe51cf21ae1b525f926",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 25, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab2381a8c8b13365a8003e0",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 26, 6:25 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab38adb97877917d2cd3690",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 26, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab38adcc5fe69b4e8841c0b",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 27, 9:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab38ade97877917d2cd36ff",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 27, 9:17 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab4da10514df3bc1ed2bb40",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 28, 7:05 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab4da11153ba7c8a69e69fb",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 28, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab4da125b0b95240b4fcb57",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 29, 5:53 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab4da14514df3bc1ed2bba6",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 29, 7:25 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab6305fdb73444101e68326",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 30, 1:26 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab78016f59168c9753ae356",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Sep 30, 6:45 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab7801784e8fc26af2644a5",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 1, 8:57 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ab8d9053d66d464e5ce3bac",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 1, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abcd3cfb2af54bf8177358c",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 2, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abcd3d1b2af54bf817735b9",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 2, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abcd3d38abdfc4d66afa1fc",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 3, 6:25 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abcd3d463df92b8caf13a6e",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 3, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abcd3d6cd7a92eb8c4d4bf8",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 4, 9:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abe2aa33ba994290b1b795d",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 4, 9:17 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6abf7620f781c1ecf15de553",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 5, 7:05 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac0c20bca55406b4b2964a4",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 5, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac0c20d16dec17c265a3aac",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 6, 5:53 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac0c20e713b7277a0b22917",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 6, 7:25 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac0c20f4619427d30e765c8",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 7, 1:26 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac0c2119fdc9f926e71be82",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 7, 6:45 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac218d2814d657011eb8451",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 8, 8:57 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac4c25cadf769dd94dcddce",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 8, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac6142590fcf9e63fb3248f",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 9, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac61426e94d010750056ed3",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 9, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac6142833884235d9d50c14",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 10, 6:25 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac61429e94d010750056f72",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 10, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac6142be94d010750056fef",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 11, 9:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac76801d9e8f417cbc4cf5e",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 11, 9:17 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac76802deb9a4752cedef66",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 12, 7:05 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac76802deb9a4752cedef97",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 12, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac76803d9e8f417cbc4cfce",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 13, 5:53 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac768046a3120c31093ea94",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 13, 7:25 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ac8b9a344e5efbcc5998220",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 14, 1:26 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6acb5840d9cab260a7f193bc",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 14, 6:45 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad086cc0570cc9f9a416789",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 16, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad1d6af9597cd1662714806",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 16, 9:30 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad323ebe06ddf8646ceb924",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 17, 10:39 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad323ecae173d6e00a780fb",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 18, 9:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad323ee0a208cb3230d72a1",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 18, 9:17 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad323efe06ddf8646ceb97e",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 19, 7:05 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad323f0dd83363c4dc02215",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 19, 8:41 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad477f3769b457934b18c49",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 20, 5:53 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad5d455fd8708632325f22c",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 20, 7:25 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad5d4568499c6b28d72af35",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 21, 1:26 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad5d458fd8708632325f323",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 21, 6:45 PM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad5d45941a12ee99c6f9958",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 22, 8:57 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad5d45a4572d5e4b66df5c9",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 22, 9:13 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad72125c4a5f1eea4c63851",
+      "ui_label": "Post errored for nazakataleofficial instagram channel on Oct 23, 6:01 AM (Asia/Karachi)",
+      "state": "errored",
+      "platform": "instagram",
+      "error": "It looks like Buffer has lost authorization to post on your behalf. Please refresh your channel to resume scheduling."
+    },
+    {
+      "buffer_post_id": "6ad9c68fc0efd57f50735c78",
+      "ui_label": "Post scheduled for nazakataleofficial instagram channel on Oct 24, 6:25 AM (Asia/Karachi)",
+      "state": "scheduled",
+      "platform": "instagram",
+      "error": null
+    },
+    {
+      "buffer_post_id": "6ad9c690d26c2ef1687f24b7",
+      "ui_label": "Post scheduled for nazakataleofficial instagram channel on Oct 24, 10:39 PM (Asia/Karachi)",
+      "state": "scheduled",
+      "platform": "instagram",
+      "error": null
+    },
+    {
+      "buffer_post_id": "6ad9c69268fbd2404aab2ded",
+      "ui_label": "Post scheduled for nazakataleofficial instagram channel on Oct 25, 9:01 AM (Asia/Karachi)",
+      "state": "scheduled",
+      "platform": "instagram",
+      "error": null
+    },
+    {
+      "buffer_post_id": "6ad9c693c0efd57f50735d3c",
+      "ui_label": "Post scheduled for nazakataleofficial instagram channel on Oct 25, 9:17 PM (Asia/Karachi)",
+      "state": "scheduled",
+      "platform": "instagram",
+      "error": null
+    }
+  ]
+}
+
