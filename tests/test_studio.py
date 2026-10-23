@@ -171,6 +171,38 @@ class SafetyTests(unittest.TestCase):
             fetch.assert_not_called()
 
 
+class ConnectionReportTests(unittest.TestCase):
+    def test_missing_token_never_calls_provider(self):
+        from studio.connections import inspect_connections
+        with patch('studio.connections.graphql') as transport:
+            with self.assertRaises(ValueError):
+                inspect_connections('', {}, transport)
+            transport.assert_not_called()
+
+    def test_report_verifies_all_three_exact_accounts_without_mutation(self):
+        from studio.connections import inspect_connections
+        calls = []
+        def transport(query, variables, token):
+            calls.append(query)
+            if query.startswith('query Account'):
+                return {'account': {'organizations': [{'id': 'org'}]}}
+            return {'channels': [{'id': p, 'service': p, 'externalLink': core.ACCOUNTS[p],
+                'isDisconnected': False, 'isLocked': False, 'isQueuePaused': False}
+                for p in ('linkedin', 'instagram', 'twitter')]}
+        report = inspect_connections('dummy', {p: p for p in ('linkedin', 'instagram', 'twitter')}, transport)
+        self.assertTrue(all(report[p]['ready'] for p in ('linkedin', 'instagram', 'twitter')))
+        self.assertFalse(report['facebook']['ready'])
+        self.assertTrue(all(q.startswith('query') for q in calls))
+        self.assertNotIn('dummy', json.dumps(report))
+
+    def test_missing_channel_secret_is_reported_as_not_ready(self):
+        from studio.connections import inspect_connections
+        def transport(query, variables, token):
+            return {'account': {'organizations': [{'id': 'org'}]}}
+        report = inspect_connections('dummy', {}, transport)
+        self.assertTrue(all(not item['ready'] for item in report.values()))
+
+
 class CampaignTests(unittest.TestCase):
     def test_all_48_platform_captions_fit_and_have_original_sources(self):
         self.assertEqual(len(TOPICS), 12)
