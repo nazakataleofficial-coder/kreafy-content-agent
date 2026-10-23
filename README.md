@@ -15,10 +15,11 @@ The workflow only becomes active after this branch is merged into the default br
 
 - 12 original topics, each adapted to four platforms: 48 drafts.
 - Facebook and Instagram: Roman Urdu. LinkedIn and X: English.
-- Portrait 1080x1350 and wide 1200x675 PNG exports with actionable checklists.
-- Existing `assets/real_photos/confident.png` is fitted in full, never regenerated
-  or cropped. This preserves the selected repository asset, not a claim about its
-  photographic authenticity or the identity of every other photo in the bank.
+- Portrait 1080x1350 and wide 1200x675 PNG exports: large photo, short bold headline, small brand footer. Detailed diagnostic advice stays in captions.
+- Default identity: exact user-approved upload at `assets/approved_identity/nazakat-ale-approved.png`, bound to its SHA-256 in `reference.json`. Missing/changed reference stops preparation; no legacy fallback.
+- The uploaded poster is preserved byte-for-byte. Only its lower old headline/footer zone is excluded when composing new topics (photo rectangle: 0,0–1122,1000). Hair, face, beard and hand remain in the extracted photograph; no face regeneration or retouching occurs.
+- The 22 historical `assets/real_photos` images and five cartoon poses remain for history, but the free draft studio never rotates through them. Folder names do not verify identity.
+- Offline drafts reuse the approved photo; they do not generate new poses, clothing or backgrounds. Generated variations need the approved reference plus visual review; no paid generation API is enabled.
 - Local read-only HTML review report, planned PKT calendar and blank KPI scorecard.
 - Exact-content, per-platform approvals; changed content invalidates approval.
 - Optional Buffer queue adapter checks account identity and connection state,

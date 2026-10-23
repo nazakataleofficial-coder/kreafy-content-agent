@@ -1,3 +1,26 @@
+## Approved identity upgrade — 2026-10-23
+
+The user-approved `image(5).png` is preserved byte-for-byte as
+`assets/approved_identity/nazakat-ale-approved.png` (SHA-256
+`68ff5338eb4250b855804a2ed6cbd1ab75451d8b3dae4b3a872b72bf7d341486`).
+The free studio selects only this reference. The 22 historical images remain
+unchanged and are not selected by this workflow. Missing or changed approved
+bytes stop preparation without a fallback.
+
+Template v3 keeps the approved photographic region large, removes the previous
+checklists/subtitle and uses a short bold headline plus small brand footer.
+The original poster's old text is excluded at y=1000; the hair, face, beard and
+hand remain in the photo. No face generation, facial retouching or pose variation
+is performed. New AI variations require separate visual likeness review.
+
+Validation: 22 local tests pass, all 12 topics / 48 drafts render, and both
+portrait/wide exports were visually reviewed. New reference/layout changes create
+new content identities; previous approvals cannot approve these new previews.
+No new social posts were queued or published by this upgrade.
+
+Earlier implementation notes below describe the previous template and its tests;
+this approved identity configuration supersedes their default-photo selection.
+
 # Free Studio — implementation and verification boundary
 
 Prepared 2026-10-23 for Nazakat Ale / TheAleBuilds x Kreafy.
