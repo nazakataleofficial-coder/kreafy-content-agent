@@ -15,6 +15,16 @@ def main():
     prepare.add_argument('--start', default=datetime.now(ZoneInfo('Asia/Karachi')).date().isoformat())
     prepare.add_argument('--out', default='studio-output')
     commands.add_parser('inspect-buffer')
+    status = commands.add_parser('status')
+    status.add_argument('--journal', default='studio-private/delivery.sqlite3')
+    record = commands.add_parser('record-publication')
+    record.add_argument('manifest')
+    record.add_argument('--platform', choices=PLATFORMS, required=True)
+    record.add_argument('--url', required=True)
+    record.add_argument('--observed-at', required=True)
+    record.add_argument('--published-at')
+    record.add_argument('--account-verified', action='store_true')
+    record.add_argument('--journal', default='studio-private/delivery.sqlite3')
     drive = commands.add_parser('import-drive')
     drive.add_argument('--folder', required=True)
     drive.add_argument('--out', default='studio-private/drive')
@@ -43,10 +53,19 @@ def main():
         imported = import_images(args.folder, args.out)
         print(f'{len(imported)} images imported read-only. No automatic use or sharing.')
         return
+    if args.command == 'status':
+        from studio.publications import publication_status
+        print(json.dumps(publication_status(journal=args.journal), ensure_ascii=False, indent=2))
+        return
     manifest = json.loads(Path(args.manifest).read_text(encoding='utf-8'))
     post = manifest['platforms'][args.platform]
     count = validate_post(post, args.platform)
-    if args.command == 'validate':
+    if args.command == 'record-publication':
+        from studio.publications import record_publication
+        receipt = record_publication(post, args.platform, args.journal, args.url,
+                                     args.observed_at, args.published_at, args.account_verified)
+        print(json.dumps(receipt, indent=2))
+    elif args.command == 'validate':
         print(f'{args.platform}: valid local image and caption ({count} conservative characters). Account and live sources need verification before delivery.')
     elif args.command == 'approve':
         approve(post)
