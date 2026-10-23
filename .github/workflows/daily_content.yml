@@ -20,11 +20,13 @@ concurrency:
 
 jobs:
   prepare-drafts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.11'
           cache: pip
@@ -38,11 +40,11 @@ jobs:
           CAMPAIGN_START: ${{ inputs.campaign_start || '2026-10-26' }}
         run: python -m studio prepare --start "$CAMPAIGN_START"
       - name: Save unpublished previews and blank KPI scorecard
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: kreafy-unpublished-previews-${{ github.run_number }}
           path: studio-output/
-          retention-days: 30
+          retention-days: 7
       - name: Explain completion boundary
         run: |
           echo 'Prepared finite editorial bank. No model API charges, sharing changes, messages or publishing.' >> "$GITHUB_STEP_SUMMARY"
