@@ -14,6 +14,7 @@ def main():
     prepare = commands.add_parser('prepare')
     prepare.add_argument('--start', default=datetime.now(ZoneInfo('Asia/Karachi')).date().isoformat())
     prepare.add_argument('--out', default='studio-output')
+    commands.add_parser('inspect-buffer')
     drive = commands.add_parser('import-drive')
     drive.add_argument('--folder', required=True)
     drive.add_argument('--out', default='studio-private/drive')
@@ -28,6 +29,14 @@ def main():
         from studio.prepare import prepare
         paths = prepare(Path(__file__).resolve().parents[1], args.out, args.start)
         print(f'{len(paths)} topics / {len(paths)*4} drafts prepared. Nothing queued or published.')
+        return
+    if args.command == 'inspect-buffer':
+        from studio.connections import inspect_connections
+        report = inspect_connections(os.environ.get('BUFFER_ACCESS_TOKEN', ''),
+            {p: os.environ.get(f'BUFFER_{p.upper()}_ID', '') for p in ('linkedin', 'instagram', 'twitter')})
+        print(json.dumps(report, indent=2))
+        if not all(report[p]['ready'] for p in ('linkedin', 'instagram', 'twitter')):
+            raise SystemExit(1)
         return
     if args.command == 'import-drive':
         from studio.drive import import_images
