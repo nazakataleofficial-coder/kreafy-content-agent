@@ -16,10 +16,11 @@ The workflow only becomes active after this branch is merged into the default br
 - 12 original topics, each adapted to four platforms: 48 drafts.
 - Facebook and Instagram: Roman Urdu. LinkedIn and X: English.
 - Portrait 1080x1350 and wide 1200x675 PNG exports: large photo, short bold headline, small brand footer. Detailed diagnostic advice stays in captions.
-- Default identity: exact user-approved upload at `assets/approved_identity/nazakat-ale-approved.png`, bound to its SHA-256 in `reference.json`. Missing/changed reference stops preparation; no legacy fallback.
-- The uploaded poster is preserved byte-for-byte. Only its lower old headline/footer zone is excluded when composing new topics (photo rectangle: 0,0–1122,1000). Hair, face, beard and hand remain in the extracted photograph; no face regeneration or retouching occurs.
-- The 22 historical `assets/real_photos` images and five cartoon poses remain for history, but the free draft studio never rotates through them. Folder names do not verify identity.
-- Offline drafts reuse the approved photo; they do not generate new poses, clothing or backgrounds. Generated variations need the approved reference plus visual review; no paid generation API is enabled.
+- Identity references: the user-approved front poster plus approved left/right views in `assets/approved_identity/`. Each is checksum-bound in `expression-bank.json`.
+- All 22 `assets/real_photos/*.png` portraits have been replaced with newly generated office portraits using those references: Pakistani shalwar kameez, consistent warm office, silver Dell laptop, navy mug/coaster, tan notebook and black pen. They are AI-generated, not photographs of real documented events. Small visual differences remain possible.
+- Each campaign topic selects an intentional expression. The complete selected photo is fitted without cropping or regeneration during offline preparation. All 22 file hashes and the three reference hashes are checked first; missing/changed files stop generation without a legacy fallback.
+- Source references were approved by the user; individual generated assets received assistant visual review. This does not approve any platform post or guarantee a biometric match. Final publishing still requires separate platform-preview approval.
+- No image generation API is called by the automated workflow. The checked-in finite portrait bank is reused offline. Old versions remain in Git history.
 - Local read-only HTML review report, planned PKT calendar and blank KPI scorecard.
 - Exact-content, per-platform approvals; changed content invalidates approval.
 - Optional Buffer queue adapter checks account identity and connection state,

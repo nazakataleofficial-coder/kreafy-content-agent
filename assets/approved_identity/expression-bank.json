@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "generation_date_pkt": "2026-10-24",
+  "method": "Built-in image generation; no model API keys or additional paid services used.",
+  "review": "Assistant visually reviewed; not an exact biometric match guarantee. User approved the three identity references; final platform posts still require separate approval.",
+  "references": {
+    "nazakat-ale-approved.png": {
+      "path": "assets/approved_identity/nazakat-ale-approved.png",
+      "sha256": "68ff5338eb4250b855804a2ed6cbd1ab75451d8b3dae4b3a872b72bf7d341486",
+      "user_approved": true
+    },
+    "left-approved.png": {
+      "path": "assets/approved_identity/left-approved.png",
+      "sha256": "3abb14e32ba1f3c644b388302224bd1d146fb690ec00c636debe3c2c613f926a",
+      "user_approved": true
+    },
+    "right-approved.png": {
+      "path": "assets/approved_identity/right-approved.png",
+      "sha256": "5d6ee4204e1964f6e36de15e961c6d6c0263c814876d509f2e94edf84d8ba5f0",
+      "user_approved": true
+    }
+  },
+  "assets": {
+    "professional": {
+      "path": "assets/real_photos/professional.png",
+      "sha256": "87db9196eb9b905d7483ef3179cf011e08002881a282b644b3f4da3cc5f78b24",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Photographic identity-preserving edit. These THREE references are the SAME approved man: image 1 front, image 2 left turn, image 3 right turn. Match his identity to these references, not a generic similar man. Preserve his original eye shape, nose, cheek fullness, long oval jaw, swept hair, full beard and curled moustache; natural head/body proportions. Create one clean professional neutral portrait, no text. Same charcoal Pakistani shalwar kameez and SAME warm office from image 1: window/blind image left, dark wooden shelves and green plant image right, warm desk lamp image right, same dark chair. Slightly widen framing to include the wooden desk. Add fixed series props: silver Dell XPS 13 laptop, round DELL logo on outer lid, open toward him at center; plain navy-blue ceramic mug on round cork coaster image right of laptop, handle right; tan closed notebook with black pen image left of laptop. All props within frame. Man relaxed seated behind desk, both forearms resting naturally beside laptop, neutral professional expression, face prominent and both eyes visible. Natural everyday phone photograph, real skin and fabric texture, no beauty filter or over-polished skin. Preserve approved face above all. No old headline, no footer, no branding text except Dell logo. One portrait 4:5, no collage."
+    },
+    "authoritative": {
+      "path": "assets/real_photos/authoritative.png",
+      "sha256": "6c14480b28cc2bfa2c07b51ac1f86d57552c206da45fc56425b6c35f0a6b60d5",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for authoritative.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: calm knowledgeable expression with one index finger gently lifted. Dress: plain charcoal cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "bold": {
+      "path": "assets/real_photos/bold.png",
+      "sha256": "602c430794ae28e895b8455635c3f5d1470dcfa09c148b2d8d0802cfbfdd3b0f",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for bold.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: self-assured gaze with chin neutral and relaxed hands on desk. Dress: plain olive cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "assertive": {
+      "path": "assets/real_photos/assertive.png",
+      "sha256": "23943a05e8ed07aaea8ac68318e54654a6c580a6308293daa709a275dce06e34",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for assertive.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: firm attentive expression with a small open-hand explaining gesture. Dress: plain navy cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "approving": {
+      "path": "assets/real_photos/approving.png",
+      "sha256": "fba05cdb3a71eca697715f0b7beef6ec156871fd7d38fbe3279649afc41cc422",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for approving.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: subtle approving closed-mouth smile and a small thumbs-up near chest. Dress: plain charcoal cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "curious": {
+      "path": "assets/real_photos/curious.png",
+      "sha256": "d0d218a972276b9136c04e522d3cda30e4a852406b20172a8b06511759aa92ee",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for curious.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: slightly lifted eyebrows, inquisitive gaze and subtle head tilt. Dress: plain charcoal cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "determined": {
+      "path": "assets/real_photos/determined.png",
+      "sha256": "b32a1614f098d141b56cb9158b7854bb71bfbcdf2b4c071fbd52a5d3f75c6d74",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for determined.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: focused purposeful expression with gently knitted brows. Dress: plain olive cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "casual": {
+      "path": "assets/real_photos/casual.png",
+      "sha256": "e535069f3f22adc914a89164aa81ed6bec6be89def315a6345d0977b36b1d0ea",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for casual.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: relaxed conversational face, shoulders easy, one hand on desk. Dress: plain cream cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "confident": {
+      "path": "assets/real_photos/confident.png",
+      "sha256": "5278a306c67d0a18a006e8515653b5ced4d37ccd385bb569011d26fde851dd63",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for confident.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: quiet confident small smile, upright comfortable posture. Dress: plain navy cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "friendly": {
+      "path": "assets/real_photos/friendly.png",
+      "sha256": "2e93d4687a3b124f7a6b4dbd37f3f8d136c312a169bb9d18e3dc912569db5ecf",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for friendly.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: approachable natural small smile and relaxed eyes. Dress: plain cream cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "frustrated": {
+      "path": "assets/real_photos/frustrated.png",
+      "sha256": "8300af5d5de95177d252139ea92d878f1d0e7e4ecc1429413e2e9d266203cdf4",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for frustrated.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: mild believable frustration, brows lightly knitted, lips pressed softly, one hand near temple. Dress: plain navy cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "intense": {
+      "path": "assets/real_photos/intense.png",
+      "sha256": "1200820b728d529e8d9d84f691968e5889e142d1c5b38239074eb89883cbb35b",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for intense.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: concentrated engaged gaze, slight forward lean, neutral closed lips. Dress: plain olive cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "happy": {
+      "path": "assets/real_photos/happy.png",
+      "sha256": "2e745abb6078a9f2e9deb63f4ded10d9ed8d6061cbdbceab04a9ac172805ffbd",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for happy.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: natural happy smile with a little teeth showing and smile lines. Dress: plain charcoal cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "mysterious": {
+      "path": "assets/real_photos/mysterious.png",
+      "sha256": "c067b764aabb6d279249a535fc78277bfd05e344360bd2e93794537081bc1e9e",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for mysterious.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: quiet reserved reflective expression, gaze slightly off camera. Dress: plain navy cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "shocked": {
+      "path": "assets/real_photos/shocked.png",
+      "sha256": "2614118602a9fbcd71325143930bee3454483d1bd0b684a9d97d0a5d4aef8d46",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for shocked.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: moderate believable surprise, raised eyebrows and slightly parted mouth, not a meme. Dress: plain navy cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "passionate": {
+      "path": "assets/real_photos/passionate.png",
+      "sha256": "187cf9af71f852d5cc2b62eec873ba321455ddf38cce2863a6cc1ef4fe133175",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for passionate.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: enthusiastic explaining expression, lips slightly parted, small hand gesture. Dress: plain charcoal cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "skeptical": {
+      "path": "assets/real_photos/skeptical.png",
+      "sha256": "82f5cdfe90c6cb3e2f41c25b69c4470ee8d6681ae2928cd7ff2d2afd37b29b81",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for skeptical.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: one eyebrow subtly raised and questioning slight mouth tension. Dress: plain charcoal cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "proud": {
+      "path": "assets/real_photos/proud.png",
+      "sha256": "39280f9bfd9dfedc935045e0c26fc3df58335a063ec330be024fcc90b8c87e1a",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for proud.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: quietly pleased small smile, chin lifted just a little. Dress: plain cream cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "stern": {
+      "path": "assets/real_photos/stern.png",
+      "sha256": "d4a848896e2cf3ad5653a108b93b3d9b733cc49255975761301a47992a220575",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for stern.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: firm unsmiling expression, gently furrowed brow, no exaggerated anger. Dress: plain navy cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "serious": {
+      "path": "assets/real_photos/serious.png",
+      "sha256": "ca71adfc40bac2a4433946e619a6f56f7472f15e77f483ec114e6eae6e3d3eab",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for serious.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: almost frontal, only a modest turn; face prominent and both eyes visible. Expression/action: neutral unsmiling serious face, no anger, hand near chin. Dress: plain olive cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "thoughtful": {
+      "path": "assets/real_photos/thoughtful.png",
+      "sha256": "772f5c1595410c364bd92053b798149cbfa97eedc39cf1e77858ba851dae0dd6",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for thoughtful.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle LEFT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: reflective expression, hand naturally supporting chin, gaze slightly away. Dress: plain cream cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    },
+    "warm": {
+      "path": "assets/real_photos/warm.png",
+      "sha256": "a8f28d6d8def445faf3a9738a69e66189a490083d292288f01f506e3712207ed",
+      "size": [
+        1122,
+        1402
+      ],
+      "ai_generated": true,
+      "assistant_reviewed": true,
+      "user_approved_individually": false,
+      "prompt": "Identity-preserving photographic edit for warm.png. Image 1 is the APPROVED face reference for this angle; image 2 is the approved frontal face; image 3 is the FIXED OFFICE/PROPS reference. Same recognizable man throughout: preserve eye shape, nose, natural cheek fullness, long oval jaw, age/skin, swept hairstyle, full beard outline and curled moustache. Do not shorten face, inflate hair, change facial anatomy or beautify. Pose: gentle RIGHT-facing turn matching image 1, only a modest turn; face prominent and both eyes visible. Expression/action: gentle sincere closed-mouth smile and soft welcoming eyes. Dress: plain olive cotton Pakistani shalwar kameez with natural creases. Keep ordinary average body/head/shoulder proportions. Keep image 3's SAME warm Pakistani office, walnut desk, dark chair, left window/blind, right shelves/plant/lamp. EXACT SAME silver Dell laptop centered open toward man, SAME navy ceramic coffee cup on cork coaster at viewer's right with right-facing handle, SAME closed tan notebook and black pen at viewer's left. Keep prop identities/shapes/physical locations; no substitutions or duplicates. All head/hair and cup handle should remain inside frame. Same eye-level medium portrait framing and natural room/window light. Realistic skin/fabric texture, casual phone photo feel, no glossy beauty filter or excessive blur. NO TEXT, headline, footer, watermark or added labels; only existing Dell lid logo. One standalone portrait 4:5. Identity similarity to APPROVED facial references has highest priority."
+    }
+  }
+}
