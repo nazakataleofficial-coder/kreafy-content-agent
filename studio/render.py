@@ -74,4 +74,4 @@ def render(photo, headline, takeaway, output, variant='portrait', checklist=()):
     output.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(output, 'PNG', optimize=True)
     return {'size': [width, height], 'source_cropped': False, 'face_regenerated': False,
-            'photo_box': list(box), 'template_version': 3}
+            'photo_box': list(box), 'template_version': 4}

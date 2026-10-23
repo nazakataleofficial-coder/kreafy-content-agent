@@ -1,3 +1,11 @@
+## Expression bank upgrade — 2026-10-24 PKT
+
+All 22 named portraits in `assets/real_photos` were replaced using the user-approved front, left and right facial references. Full prompts and asset/reference checksums are in `assets/approved_identity/expression-bank.json`; see [gallery and topic mapping](EXPRESSION_BANK.md).
+
+The draft studio selects 12 deliberate expressions for its 12 topics, fitting the full selected portrait without source cropping. Source assets are correctly marked AI-generated; composition performs no additional face generation. All bank/reference hashes are verified before output. No paid API, new integration or social publishing was activated. Individual generated assets were visually reviewed by the assistant; user publishing approval remains per platform.
+
+Earlier notes below describe previous templates and default selection, superseded by this bank.
+
 ## Approved identity upgrade — 2026-10-23
 
 The user-approved `image(5).png` is preserved byte-for-byte as
