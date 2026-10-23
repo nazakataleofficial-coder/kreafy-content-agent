@@ -1,0 +1,2 @@
+# Draft preparation uses no model API, social token, or additional subscription.
+Pillow==12.3.0

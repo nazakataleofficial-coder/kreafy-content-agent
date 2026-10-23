@@ -75,6 +75,7 @@ def _extract_json(text):
 
 
 def generate_with_gemini():
+    config.require_billable_api_opt_in()
     import google.generativeai as genai
 
     genai.configure(api_key=config.GEMINI_API_KEY)
@@ -84,6 +85,7 @@ def generate_with_gemini():
 
 
 def generate_with_claude():
+    config.require_billable_api_opt_in()
     import anthropic
 
     client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)

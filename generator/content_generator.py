@@ -181,6 +181,7 @@ def _extract_json(text):
 
 
 def generate_with_gemini(topics_summary, num_posts):
+    config.require_billable_api_opt_in()
     import google.generativeai as genai
 
     genai.configure(api_key=config.GEMINI_API_KEY)
@@ -192,6 +193,7 @@ def generate_with_gemini(topics_summary, num_posts):
 
 
 def generate_with_claude(topics_summary, num_posts):
+    config.require_billable_api_opt_in()
     import anthropic
 
     client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)

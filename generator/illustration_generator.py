@@ -22,6 +22,7 @@ GEMINI_IMAGE_MODEL = "gemini-2.5-flash-image"  # verify current name in Google A
 
 
 def generate_illustration(prompt, out_path):
+    config.require_billable_api_opt_in()
     import google.generativeai as genai
 
     genai.configure(api_key=config.GEMINI_API_KEY)
