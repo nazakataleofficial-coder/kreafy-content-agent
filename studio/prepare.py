@@ -8,6 +8,7 @@ from pathlib import Path
 from studio.content import TOPICS, captions
 from studio.core import ACCOUNTS, PLATFORMS, atomic_json, digest, file_hash, validate_post
 from studio.render import render
+from studio.identity import approved_reference
 
 
 def prepare(root, destination, start):
@@ -22,14 +23,12 @@ def prepare(root, destination, start):
         if cursor.weekday() in (0, 2, 4):
             days.append(cursor)
         cursor += timedelta(days=1)
-    photo = root / 'assets/real_photos/confident.png'
-    if not photo.is_file():
-        raise ValueError('Original photo asset missing; no synthetic replacement allowed')
+    photo, extracted_photo, policy = approved_reference(root)
     destination.mkdir(parents=True, exist_ok=True)
     cards, rows, manifest_paths = [], [], []
     for scheduled_day, topic in zip(days, TOPICS):
         identity = digest({'topic': topic, 'captions': captions(topic),
-                           'photo': file_hash(photo), 'template_version': 2})[:16]
+                           'photo': file_hash(photo), 'identity_policy': policy, 'template_version': 3})[:16]
         folder = destination / f'{scheduled_day}-{topic["id"]}-{identity}'
         manifest_path = folder / 'manifest.json'
         manifest_paths.append(manifest_path)
@@ -42,7 +41,7 @@ def prepare(root, destination, start):
             images = {}
             for variant in ('portrait', 'wide'):
                 temp = folder / f'{variant}.png'
-                render(photo, topic['headline'], topic['takeaway'], temp, variant, topic['poster_steps'])
+                render(extracted_photo, topic['headline'], topic['takeaway'], temp, variant, topic['poster_steps'])
                 hashed = folder / f'{variant}-{file_hash(temp)[:20]}.png'
                 temp.rename(hashed)
                 images[variant] = hashed
@@ -50,7 +49,10 @@ def prepare(root, destination, start):
                         'pillar': topic['pillar'], 'goal': topic['goal'],
                         'editorial_note': 'Original recommendations; not a verified engagement or earnings claim. Source links are references, not live monitoring.',
                         'source_photo_sha256': file_hash(photo),
-                        'render': {'source_cropped': False, 'face_regenerated': False},
+                        'identity_policy': policy,
+                        'render': {'source_cropped': True, 'crop_box': policy['photo_box'],
+                                   'crop_reason': 'Remove existing poster headline/footer only',
+                                   'face_regenerated': False, 'template_version': 3},
                         'platforms': {}}
             for platform, caption in captions(topic).items():
                 image = images['wide' if platform == 'twitter' else 'portrait']
@@ -69,7 +71,7 @@ def prepare(root, destination, start):
             cards.append(f'<article data-platform="{platform}"><h2>{html.escape(str(scheduled_day))} | {platform.title()}</h2>'
                          f'<p>{html.escape(topic["headline"])}</p>'
                          f'<a href="{html.escape(post["account_url"], quote=True)}" rel="noreferrer">Intended account</a>'
-                         f'<img loading="lazy" src="{html.escape(relative, quote=True)}" alt="Full original photo with educational headline">'
+                         f'<img loading="lazy" src="{html.escape(relative, quote=True)}" alt="Approved face reference with a short educational headline">'
                          f'<p>{post["word_count"]} words | {post["validated_character_count"]} conservative characters | Draft</p>'
                          f'<pre>{html.escape(post["caption"])}</pre>'
                          '<details><summary>Reference URLs</summary>' + ''.join(
@@ -84,7 +86,7 @@ def prepare(root, destination, start):
 <title>Kreafy - unpublished campaign previews</title><style>
 body{margin:0;background:#0f0f0f;color:#f7f5ef;font:16px/1.6 system-ui}header{padding:32px;max-width:1000px;margin:auto}h1,h2{color:#c8a96b}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,370px),1fr));gap:24px;padding:24px}article{background:#191919;border:1px solid #444;border-radius:12px;padding:22px;min-width:0}img{width:100%;max-height:500px;object-fit:contain;margin:18px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}a{color:#e4c98f}details{overflow-wrap:anywhere}</style>
 <header><h1>TheAleBuilds x Kreafy</h1><p>12 original topics / 48 platform drafts. Nothing is published by this report.</p>
-<p>Facebook + Instagram: Roman Urdu. LinkedIn + X: English. Complete source photo is fitted without cropping. Dates are a proposed PKT editorial calendar, not publishing reservations.</p>
+<p>Facebook + Instagram: Roman Urdu. LinkedIn + X: English. Approved face pixels are reused. The original poster’s lower text zone is removed before fitting the photographic region; no new face or pose is generated. Dates are a proposed PKT editorial calendar, not publishing reservations.</p>
 <p>Source links require current-context review before approval. Metrics remain unknown until observed. This file has no login, approval, publishing, analytics or external script.</p></header><main>'''
     (destination / 'index.html').write_text(page + '\n'.join(cards) + '</main></html>', encoding='utf-8')
     scorecard = destination / 'scorecard.csv'

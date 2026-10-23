@@ -204,6 +204,32 @@ class ConnectionReportTests(unittest.TestCase):
 
 
 class CampaignTests(unittest.TestCase):
+    def test_approved_photo_extraction_preserves_pixels_and_excludes_old_text(self):
+        from studio.identity import approved_reference
+        photo, extracted, policy = approved_reference(ROOT)
+        self.assertEqual(extracted.size, (1122, 1000))
+        with Image.open(photo) as original:
+            self.assertEqual(extracted.tobytes(), original.convert('RGB').crop((0, 0, 1122, 1000)).tobytes())
+        self.assertFalse(policy['legacy_rotation'])
+        self.assertFalse(policy['face_regeneration'])
+
+    def test_missing_or_changed_reference_never_uses_legacy_faces(self):
+        from studio.identity import approved_reference
+        import shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            shutil.copytree(ROOT / 'assets/approved_identity', root / 'assets/approved_identity')
+            legacy = root / 'assets/real_photos'
+            legacy.mkdir()
+            Image.new('RGB', (30, 30), 'red').save(legacy / 'confident.png')
+            approved = root / 'assets/approved_identity/nazakat-ale-approved.png'
+            approved.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError, 'fallback is forbidden'):
+                approved_reference(root)
+            approved.unlink()
+            with self.assertRaisesRegex(ValueError, 'fallback is forbidden'):
+                approved_reference(root)
+
     def test_all_48_platform_captions_fit_and_have_original_sources(self):
         self.assertEqual(len(TOPICS), 12)
         self.assertEqual(len({t['id'] for t in TOPICS}), 12)
@@ -245,12 +271,15 @@ class CampaignTests(unittest.TestCase):
             original_scorecard = scorecard.read_text()
             self.assertNotIn(',0,', original_scorecard)  # unknown metrics are empty
             scorecard.write_text(original_scorecard + '\nMANUAL RECORD PRESERVED\n')
-            photo_before = core.file_hash(ROOT / 'assets/real_photos/confident.png')
+            photo_before = core.file_hash(ROOT / 'assets/approved_identity/nazakat-ale-approved.png')
             prepare(ROOT, tmp, '2026-10-26')
             second = json.loads(paths[0].read_text())
             core.require_approval(second['platforms']['linkedin'])
             self.assertIn('MANUAL RECORD PRESERVED', scorecard.read_text())
-            self.assertEqual(photo_before, core.file_hash(ROOT / 'assets/real_photos/confident.png'))
+            self.assertEqual(photo_before, core.file_hash(ROOT / 'assets/approved_identity/nazakat-ale-approved.png'))
+            self.assertEqual(second['source_photo_sha256'], photo_before)
+            self.assertEqual(second['render']['crop_box'], [0, 0, 1122, 1000])
+            self.assertFalse(second['render']['face_regenerated'])
             page = (Path(tmp) / 'index.html').read_text()
             self.assertNotIn('<script', page)
             self.assertEqual(page.count('<article '), 48)

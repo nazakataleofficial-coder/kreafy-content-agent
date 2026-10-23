@@ -1,0 +1,18 @@
+{
+  "asset": "assets/approved_identity/nazakat-ale-approved.png",
+  "sha256": "68ff5338eb4250b855804a2ed6cbd1ab75451d8b3dae4b3a872b72bf7d341486",
+  "source_size": [
+    1122,
+    1402
+  ],
+  "photo_box": [
+    0,
+    0,
+    1122,
+    1000
+  ],
+  "approval_basis": "User explicitly approved this uploaded image as their preferred face reference.",
+  "legacy_rotation": false,
+  "face_regeneration": false,
+  "variation_policy": "New poses, Pakistani clothing and backgrounds may be prepared using this reference, but every generated likeness requires visual review. Offline preparation reuses this approved photograph region; it does not generate new poses."
+}
