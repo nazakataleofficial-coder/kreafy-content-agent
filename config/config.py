@@ -69,3 +69,8 @@ OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file
 
 GOOGLE_DOC_ID = os.environ.get("GOOGLE_TOPICS_DOC_ID", "162fofOuGsVnnI9SPMkG9rU82-ph5T4mXSjzuZOpx5-4")
 GOOGLE_SERVICE_ACCOUNT_JSON = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON", "")
+
+# Legacy API generators are opt-in only; they are not part of the free workflow.
+def require_billable_api_opt_in():
+    if os.environ.get("KREAFY_ALLOW_BILLABLE_APIS") != "true":
+        raise RuntimeError("Model API calls disabled in free mode. Use python -m studio prepare. ChatGPT Plus is not an API billing plan.")

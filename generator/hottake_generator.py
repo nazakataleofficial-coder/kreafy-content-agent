@@ -74,7 +74,7 @@ FORMAT (LinkedIn ke liye - "caption_linkedin" field):
     "...see more" isi ke baad aata hai mobile par) - taake wo standalone punchy statement ho,
     beech mein se na kate
 - Beech mein: bohot chhoti lines, one-sentence-per-line, "rule of three" pattern (3 cheezein "Not X. Not Y. Not Z." wala)
-- Kreafy ka apna experience/rule ka zikar karo ek line mein (proof/credibility)
+- Personal experience, client outcomes, statistics, testimonials ya revenue invent mat karo. Sirf supplied verified evidence use karo; warna recommendation ki tarah likho.
 - Ending: polarizing question ya "A ya B, tum kaun ho" wala choice, phir "Agree or not. Drop it below 👇"
 - Har important phrase ko **do asterisks** ke beech mein likho (isay bold unicode banaya jayega baad mein)
 - 120-180 words total
@@ -131,6 +131,7 @@ def _pick_niche_for_today():
 
 
 def generate_with_gemini(prompt_text):
+    config.require_billable_api_opt_in()
     import google.generativeai as genai
 
     genai.configure(api_key=config.GEMINI_API_KEY)
@@ -140,6 +141,7 @@ def generate_with_gemini(prompt_text):
 
 
 def generate_with_claude(prompt_text):
+    config.require_billable_api_opt_in()
     import anthropic
 
     client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)

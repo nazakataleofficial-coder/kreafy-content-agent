@@ -1,136 +1,107 @@
-# Kreafy Content Agent — Zero-Touch Social Automation
+# TheAleBuilds x Kreafy — Free Draft Studio
 
-Roz khud: Google Trends (automated) + tumhara weekly curated Reddit material se → 5 unique posts likhta hai (Web Dev / App Dev / YouTube Automation / Animation / AI-Automation rotation, **bilkul simple aasan wording mein**) → har post **2 languages** mein banta hai (LinkedIn/X ke liye English, Facebook ke liye Roman Urdu) → ek **fixed recognizable character** (locked design, story ke hisab se pose/expression badalta hai) ki illustration banti hai → har version ki apni **4-slide scroll-stopping carousel** (Hook → Problem → Solution → CTA) banata hai → Buffer mein khud sahi platform pe sahi language post kar deta hai.
+An original, finite content-preparation system for Nazakat Ale and Kreafy.
+**Preparation is offline and uses no model API or additional subscription.**
+No reach, engagement, monetization, revenue, face-generation or zero-maintenance
+claim is made. This is a tested preparation upgrade, not a verified live publisher.
 
-**⚠️ 2 zaroori limitations jo test karni hain:**
-1. Buffer ka naya API (2026) images ka **public URL** maangta hai, direct upload nahi. Isliye repo **public** hona zaroori hai (images GitHub mein push hoti hain, wahan se raw URL Buffer ko diya jata hai). Pehli run ke baad **khud LinkedIn/FB/X pe jaake check karo** ke carousel sahi bana ya nahi — kabhi platform ki taraf se sirf ek image use ho sakti hai.
-2. Gemini ka image-generation model ka naam (`GEMINI_IMAGE_MODEL` in `generator/illustration_generator.py`) Google AI Studio mein badalta rehta hai. Pehli run fail ho to https://aistudio.google.com par jaake current image model ka naam check kar lena.
+## Current workflow
 
----
+The proposed replacement daily workflow prepares unpublished campaign previews on
+Monday, Wednesday and Friday. It uses no secrets, does not change Google Drive
+sharing, does not push generated media, does not send notifications and does not
+queue or publish posts. GitHub Actions timing is best effort, not an exact timer.
+The workflow only becomes active after this branch is merged into the default branch.
 
-## One-time Setup (30-40 min, phir kabhi nahi chhedna)
+- 12 original topics, each adapted to four platforms: 48 drafts.
+- Facebook and Instagram: Roman Urdu. LinkedIn and X: English.
+- Portrait 1080x1350 and wide 1200x675 PNG exports with actionable checklists.
+- Existing `assets/real_photos/confident.png` is fitted in full, never regenerated
+  or cropped. This preserves the selected repository asset, not a claim about its
+  photographic authenticity or the identity of every other photo in the bank.
+- Local read-only HTML review report, planned PKT calendar and blank KPI scorecard.
+- Exact-content, per-platform approvals; changed content invalidates approval.
+- Optional Buffer queue adapter checks account identity and connection state,
+  verifies immutable public image bytes and records a durable no-retry receipt.
+- Optional Google Drive image importer uses read-only scope, private local output,
+  file limits and checks. It does not create a connection or choose an asset for use.
 
-### 1. Gemini API key (free)
-1. https://aistudio.google.com/apikey par jao
-2. "Create API key" click karo, copy karo
+## Prepare locally
 
-### 2. Buffer API setup (free) — 2026 ka NAYA tareeqa
-⚠️ Buffer ne 2026 mein apna purana developer-apps system band kar diya hai naye users ke liye.
-Ab GraphQL API hai, personal API key ke sath.
+Python 3.11+ and a readable TrueType font (DejaVu Sans on Linux or Arial on Windows):
 
-1. https://buffer.com par account banao, LinkedIn + Facebook Page + X connect karo (free plan = 3 channels)
-2. Buffer app mein **Settings → API** jao
-3. **"Create Personal API Key"** dabao → jo key mile, copy kar lo (ye `BUFFER_ACCESS_TOKEN` hai)
-4. Apne 3 channels ki ID nikalne ke liye https://developers.buffer.com/explorer.html kholo:
-   - Apni API key wahan paste karo (top mein "Enter your API key" field)
-   - Ye query chalao:
-     ```graphql
-     query GetOrgAndChannels {
-       account { organizations { id } }
-     }
-     ```
-   - Mile hue `organizations.id` ko copy karo, phir ye query chalao:
-     ```graphql
-     query GetChannels {
-       channels(input: { organizationId: "YAHAN_ORG_ID_DAALO" }) {
-         id
-         name
-         service
-       }
-     }
-     ```
-   - Result mein har channel ka `id` + `service` (linkedin/facebook/twitter) dikhega — teeno copy kar lo
-
-**⚠️ Zaroori: Repo PUBLIC hona chahiye.** Buffer ka naya API images ka direct upload nahi leta — sirf
-ek **public image URL** accept karta hai. System khud images GitHub repo mein push kar deta hai aur
-unka `raw.githubusercontent.com` link Buffer ko deta hai — lekin ye sirf **public repos** ke liye kaam
-karta hai. Repo banate waqt "Private" nahi, **"Public"** select karna (koi API key ya secret repo
-mein nahi jaati, wo GitHub Secrets mein alag se hoti hain — safe hai public rakhna).
-
-### 3. Weekly Topics Google Doc setup (taake phone se hi weekly data daal sako)
-Maine already ye bana diya hai tumhare Drive mein: **"Kreafy Content Agent" folder → "Weekly Topics" doc**
-(https://docs.google.com/document/d/162fofOuGsVnnI9SPMkG9rU82-ph5T4mXSjzuZOpx5-4/edit)
-
-GitHub Actions ko is Doc ko padhne ke liye ek "service account" chahiye (Google ka robot-account system):
-1. https://console.cloud.google.com par jao → naya project banao (ya koi purana select karo)
-2. "APIs & Services" → "Enable APIs" → **Google Drive API** enable karo
-3. "Credentials" → "Create Credentials" → **Service Account** banao
-4. Us service account ke "Keys" tab mein jaake **JSON key download** karo
-5. JSON file khol ke uska `client_email` field copy karo (kuch aisa dikhega: `xyz@project.iam.gserviceaccount.com`)
-6. **"Weekly Topics" Google Doc khol ke Share karo** us email ke sath (Viewer access kaafi hai)
-7. Poori JSON file ka content copy karke rakh lo, agle step (Secrets) mein use hoga
-
-Agar ye step skip karna ho (thoda technical hai), koi baat nahi - system automatically `manual_topics.txt`
-(GitHub repo wali file) fallback ki tarah use kar lega. Doc wala route sirf **phone se easily edit karne ke liye** hai.
-
-### 4. GitHub repo mein Secrets daalo
-Repo → Settings → Secrets and variables → Actions → "New repository secret":
-
-| Secret Name | Value |
-|---|---|
-| `GEMINI_API_KEY` | Step 1 se |
-| `ANTHROPIC_API_KEY` | (optional - backup ke liye, Claude Code console se) |
-| `BUFFER_ACCESS_TOKEN` | Step 2 se |
-| `BUFFER_LINKEDIN_ID` | Step 2 se |
-| `BUFFER_FACEBOOK_ID` | Step 2 se |
-| `BUFFER_TWITTER_ID` | Step 2 se |
-| `GOOGLE_SERVICE_ACCOUNT_JSON` | (optional - Step 3 se, Weekly Topics Doc ke liye) |
-| `TG_BOT_TOKEN` | (optional - failure alert ke liye) @BotFather se Telegram bot bana ke milega |
-| `TG_CHAT_ID` | (optional - failure alert ke liye) @userinfobot ko message karke apna chat ID nikaalo |
-
-> **Naya:** Agar `TG_BOT_TOKEN` aur `TG_CHAT_ID` add kar do, to workflow fail hone par turant
-> Telegram par alert message aayega — bina khud GitHub Actions check kiye pata chal jayega ke
-> aaj ka post fail ho gaya. Agar nahi daaloge to bhi sab normal chalega, ye step sirf skip ho jayega.
-
-### 5. Buffer mein posting times set karo (ek baar ka kaam)
-Buffer app → har channel (LinkedIn/FB/X) → Posting Schedule → 5 time-slots add karo (Pakistan Time):
-**11:00 AM, 1:00 PM, 4:00 PM, 7:00 PM, 9:30 PM** — ye multi-region (US/UK/ME + Pakistan) audience ke
-liye best-overlap times hain. Ek baar set karne ke baad system roz khud isi schedule pe post karega.
-
-### 6. Repo push karo GitHub pe
-```bash
-cd kreafy-content-agent
-git init
-git add .
-git commit -m "Kreafy Content Agent - initial setup"
-git remote add origin https://github.com/nazakataleofficial-coder/kreafy-content-agent.git
-git push -u origin main
+```sh
+python -m pip install -r requirements-free.txt
+python -m unittest discover -s tests -v
+python -m studio prepare --start 2026-10-26
 ```
 
----
+Open `studio-output/index.html`. The first 12 Mon/Wed/Fri dates are editorial
+suggestions, not reserved posting slots. Nothing is sent. Preparation can rerun
+without overwriting existing approvals, changed caption drafts or KPI entries.
+The bank is finite; it must not be recycled and called fresh audience research.
 
-## Roz kya automatic hai, hafte mein kya manual hai
+## Delivery boundaries
 
-| Kaam | Frequency | Kaun karta hai |
-|---|---|---|
-| Google Trends se topics | Roz | Khud automatic |
-| Content likhna (5 posts, 2 languages) | Roz | Khud automatic (Gemini/Claude) |
-| Character illustration banana | Roz | Khud automatic (Gemini) |
-| Carousel images banana | Roz | Khud automatic (Puppeteer) |
-| Buffer mein queue karna | Roz | Khud automatic |
-| Buffer se actual post publish hona | Set kiye gaye 5 times pe | Buffer khud (Step 5 wale times) |
-| **Reddit se real stories dhoondna** | **Hafte mein ek baar (15-20 min)** | **Ale manually karta hai** |
+The earlier automatic `poster/buffer_poster.py` entry point is blocked. Its legacy
+code is retained as a reference, not as an alternative unapproved posting path.
+The legacy model generators require explicit `KREAFY_ALLOW_BILLABLE_APIS=true`;
+the free workflow never sets it or provides API keys. No paid fallback runs there.
 
-**Weekly kaam kaise karna hai:** Hafte mein ek baar 4-5 subreddits (webdev, Entrepreneur, SaaS, NewTubers, animation) browse karo, jo bhi genuinely relatable real story/pain-point mile usko ek line mein `manual_topics.txt` file mein paste kar do. Baaki sab khud automatic ho jayega - ye Reddit ki policy ke mutabiq zaroori hai (automated Reddit scraping AI-content ke liye allowed nahi), lekin ye sirf 15-20 min/week ka kaam hai, roz nahi.
+Queueing requires all of the following:
 
-Agar `manual_topics.txt` khali ho, system phir bhi chalega - sirf Google Trends ke topics use karega (thoda generic hoga, lekin rukega nahi).
+1. A separately approved platform preview, with image and target account verified.
+2. An authorized, connected Buffer channel on the existing free plan.
+3. The reviewed image hosted at a full-commit-SHA-pinned public repository URL.
+4. `BUFFER_ACCESS_TOKEN`, `BUFFER_ORGANIZATION_ID`, platform channel ID and a
+   persistent, backed-up SQLite journal. Never put credentials in files or chat.
+5. A live integration test after specific posting approval. No such test was run
+   as part of this upgrade.
 
-## Character (mascot) ke baare mein
-`config/config.py` mein `CHARACTER_DESIGN` permanently locked hai (Disney/Pixar-style, curly hair,
-warm smile - jo reference images se decide kiya gaya). Ye kabhi nahi badalta - roz sirf uski
-pose/expression story ke hisab se badalti hai (Gemini "illustration_prompt_en" field se). Agar
-character ka look kabhi badalna ho, sirf ye ek jagah (`CHARACTER_DESIGN`) edit karni hai.
+A `public_image_url` is added to a manifest **before** approval. Changing it,
+caption, date, account or asset hash invalidates that approval.
 
-## Poora daily flow (recap)
-1. Google Trends + `manual_topics.txt` se topics collect
-2. AI 5 posts likhta hai (EN + UR, dono languages) + har post ki illustration-pose describe karta hai
-3. Gemini us pose ka real illustration banata hai (fixed character ke sath)
-4. Puppeteer har post ki 4-slide carousel (EN + UR alag) banata hai, illustration hook slide pe lagti hai
-5. Buffer ki queue mein daal diya jata hai
-6. Buffer apne set-kiye-hue 5 daily times pe khud publish kar deta hai
+```sh
+python -m studio validate /path/to/manifest.json --platform linkedin
+# Only after the user approves that exact LinkedIn preview:
+python -m studio approve /path/to/manifest.json --platform linkedin
+# Only with authorized existing credentials and an explicit delivery enable:
+# KREAFY_PUBLISH_ENABLED=true python -m studio queue /path/to/manifest.json --platform linkedin
+```
 
-## Manually test karna ho (setup ke turant baad)
-Repo → Actions tab → "Kreafy Daily Content Agent" → "Run workflow" button — turant chala ke dekh sakte ho sab theek chal raha hai ya nahi.
+`queue` adds to the channel's existing Buffer queue. It does NOT honor the proposed
+calendar date as an exact publishing time, schedule a thread, or enable a boost.
+A returned provider ID means **queued**, not published. A timeout or missing ID
+becomes `unknown`; reruns are blocked even if the caption is reapproved or its date
+changes. Final live account appearance, public URL and publication time remain
+unknown until independently checked. There is no production scheduled delivery
+workflow: a durable shared journal and full live checks must come first.
 
-## Agar kal ko sell/scale karna ho
-Saari settings `config/config.py` mein environment variables se aati hain — koi hardcoded key nahi. Naye client ke liye bas naye secrets daalo, code same rahega.
+Facebook's intended target is a professional profile, which Buffer does not
+support. The system exports its draft; it never substitutes a Page or another
+account. Buffer Free covers only three connected channels. Direct network APIs
+are not assumed to be free or approved.
+
+## Optional Google Drive import
+
+Only after separate authorization, with an existing service account given access
+to an explicit folder and its JSON supplied through environment secrets:
+
+```sh
+python -m studio import-drive --folder AUTHORIZED_FOLDER_ID
+```
+
+The optional importer needs the existing Google packages in `requirements.txt`.
+It reads only PNG/JPEG files directly inside the folder (no subfolder scan), caps
+imports at 50 files and 10 MiB per file, uses hashed local filenames and verifies
+image decoding. It never deletes source files, changes sharing, publishes media,
+or automatically treats an imported photo as an approved identity reference.
+A Drive sharing URL is not assumed to be a suitable public image-delivery URL.
+
+## Research and verification
+
+See [implementation status](docs/FREE_STUDIO_STATUS.md) and
+[research references](docs/RESEARCH_REFERENCES.md). Source links in campaign drafts
+support context; they are not automatically refreshed, fact-checked by a model,
+or proof that a caption is highest-performing. Comments are not a prerequisite
+for the proposed enquiry-led content plan.

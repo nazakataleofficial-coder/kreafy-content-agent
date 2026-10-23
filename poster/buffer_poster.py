@@ -103,6 +103,8 @@ def add_to_buffer(channel_id, text, image_paths=None, service=None):
     posting-times schedule mein agli khali slot mein daal dega.
     'service' (facebook/twitter/linkedin) ke hisaab se platform-specific metadata add karta hai."""
 
+    raise RuntimeError("Legacy unapproved delivery is disabled. Use the studio per-platform approval and durable delivery journal.")
+
     assets = []
     if image_paths:
         for img_path in image_paths:
