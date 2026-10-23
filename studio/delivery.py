@@ -10,7 +10,8 @@ import sqlite3
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
-from studio.core import ACCOUNTS, digest, now, require_approval, validate_post
+from studio.core import ACCOUNTS, now, require_approval, validate_post
+from studio.publications import content_key
 
 API = 'https://api.buffer.com'
 CREATE = '''mutation CreatePost($input: CreatePostInput!) {
@@ -82,16 +83,17 @@ def queue_post(post, platform, journal, channel_id, organization_id, token,
     require_approval(post)
     if not all((channel_id, organization_id, token)):
         raise ValueError('Existing authorized Buffer connection is not configured')
-    verify_channel(platform, channel_id, organization_id, token, transport)
-    image_check(post)
     # Bind duplicate prevention to target and content, not approval timestamps or
     # filenames. Altering a planned date cannot make the same post publish again.
-    key = digest({'account': post['account_url'], 'caption': post['caption'],
-                  'image': post['image_sha256']})
+    key = content_key(post)
     from pathlib import Path
     Path(journal).parent.mkdir(parents=True, exist_ok=True)
     with sqlite3.connect(journal, timeout=30) as db:
         db.execute('CREATE TABLE IF NOT EXISTS delivery (key TEXT PRIMARY KEY, state TEXT NOT NULL, receipt TEXT NOT NULL)')
+        if db.execute('SELECT 1 FROM delivery WHERE key=?', (key,)).fetchone():
+            raise ValueError('Already attempted: inspect the durable receipt; never automatically repost')
+        verify_channel(platform, channel_id, organization_id, token, transport)
+        image_check(post)
         try:
             with db:
                 db.execute('INSERT INTO delivery VALUES (?, ?, ?)', (key, 'attempting', json.dumps({'attempted_at': now(), 'platform': platform})))

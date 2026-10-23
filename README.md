@@ -5,13 +5,23 @@ An original, finite content-preparation system for Nazakat Ale and Kreafy.
 No reach, engagement, monetization, revenue, face-generation or zero-maintenance
 claim is made. This is a tested preparation upgrade, not a verified live publisher.
 
+## Publication tracking and next phase
+
+Four manually published native posts are recorded in [data/publications.json](data/publications.json), with original URLs and timestamp limitations. This verifies the browser workflow only, not the Buffer API adapter. Initial metrics are observations, not growth results. See the [current implementation plan](docs/NEXT_PHASE.md).
+
+```sh
+python -m studio status
+```
+
+Status is offline: it reads recorded evidence and optional local delivery receipts, without refreshing analytics. Historical posts have no manifest fingerprint and are not automatically deduplicated. Future native publications can be reconciled against an approved manifest using `record-publication`; see the plan. Nothing is sent by either command.
+
 ## Current workflow
 
 The proposed replacement daily workflow prepares unpublished campaign previews on
 Monday, Wednesday and Friday. It uses no secrets, does not change Google Drive
 sharing, does not push generated media, does not send notifications and does not
 queue or publish posts. GitHub Actions timing is best effort, not an exact timer.
-The workflow only becomes active after this branch is merged into the default branch.
+The workflow is checked into the default branch; actual runs and artifacts must be checked in Actions.
 
 - 12 original topics, each adapted to four platforms: 48 drafts.
 - Facebook and Instagram: Roman Urdu. LinkedIn and X: English.

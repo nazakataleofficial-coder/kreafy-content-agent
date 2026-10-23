@@ -39,6 +39,8 @@ jobs:
         env:
           CAMPAIGN_START: ${{ inputs.campaign_start || '2026-10-26' }}
         run: python -m studio prepare --start "$CAMPAIGN_START"
+      - name: Include recorded publication status without refreshing accounts
+        run: python -m studio status > studio-output/publication-status.json
       - name: Save unpublished previews and blank KPI scorecard
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

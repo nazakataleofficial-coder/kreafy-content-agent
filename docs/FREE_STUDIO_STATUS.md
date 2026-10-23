@@ -1,3 +1,11 @@
+## Current status — 24 October 2026 PKT
+
+Four native browser posts were verified live on the intended accounts. Original URLs, exact available timestamps, click-time limitations and initial metrics are in [the publication ledger](../data/publications.json). This is not a successful test of the Buffer API adapter. No automatic publishing is enabled.
+
+The offline `status` and `record-publication` commands now support progress inspection and exact-manifest reconciliation with the durable delivery journal. Historical posts lack a manifest fingerprint; their ledger entries do not provide automatic duplicate prevention. The [next phase](NEXT_PHASE.md) supersedes earlier next-step recommendations below. No new poster was generated in this implementation.
+
+---
+
 ## Expression bank upgrade — 2026-10-24 PKT
 
 All 22 named portraits in `assets/real_photos` were replaced using the user-approved front, left and right facial references. Full prompts and asset/reference checksums are in `assets/approved_identity/expression-bank.json`; see [gallery and topic mapping](EXPRESSION_BANK.md).

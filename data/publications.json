@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "publications": [
+    {
+      "platform": "facebook",
+      "account_url": "https://www.facebook.com/profile.php?id=61586245874786",
+      "state": "published",
+      "topic": "AI VIDEOS BAN RAHI HAIN… MONETIZE BHI HONGI?",
+      "public_post_url": "https://www.facebook.com/photo/?fbid=122126625615208195&set=a.122102811231208195",
+      "published_at": null,
+      "observed_submit_click_at": "2026-10-24T01:42:18+05:00",
+      "verification_date_pkt": "2026-10-24",
+      "verification_method": "authenticated native browser: live account, caption and image",
+      "metrics": {
+        "reach": null,
+        "views": null,
+        "reactions": null,
+        "comments": 0,
+        "shares": null,
+        "profile_visits": null,
+        "qualified_enquiries": null,
+        "consultations": null,
+        "paid_projects": null,
+        "revenue_pkr": null
+      },
+      "metrics_note": "Initial publication snapshot only; null means unavailable or not assessed.",
+      "content_fingerprint": null,
+      "fingerprint_note": "Historical browser post was not a studio manifest. No byte-identical uploaded image hash is available. This URL record alone cannot block matching content in the delivery journal."
+    },
+    {
+      "platform": "instagram",
+      "account_url": "https://www.instagram.com/nazakataleofficial/",
+      "state": "published",
+      "topic": "AI VIDEOS BAN RAHI HAIN… MONETIZE BHI HONGI?",
+      "public_post_url": "https://www.instagram.com/nazakataleofficial/p/De2cj1MCInE/",
+      "published_at": "2026-10-24T01:45:04+05:00",
+      "observed_submit_click_at": null,
+      "verification_date_pkt": "2026-10-24",
+      "verification_method": "authenticated native browser: live account, caption and image",
+      "metrics": {
+        "reach": null,
+        "views": null,
+        "reactions": null,
+        "comments": 0,
+        "shares": null,
+        "profile_visits": null,
+        "qualified_enquiries": null,
+        "consultations": null,
+        "paid_projects": null,
+        "revenue_pkr": null
+      },
+      "metrics_note": "Initial publication snapshot only; null means unavailable or not assessed.",
+      "content_fingerprint": null,
+      "fingerprint_note": "Historical browser post was not a studio manifest. No byte-identical uploaded image hash is available. This URL record alone cannot block matching content in the delivery journal."
+    },
+    {
+      "platform": "twitter",
+      "account_url": "https://x.com/Kreafyonline",
+      "state": "published",
+      "topic": "AI VIDEOS BAN RAHI HAIN… MONETIZE BHI HONGI?",
+      "public_post_url": "https://x.com/Kreafyonline/status/2113734121734500474",
+      "published_at": "2026-10-24T01:47:40+05:00",
+      "observed_submit_click_at": null,
+      "verification_date_pkt": "2026-10-24",
+      "verification_method": "authenticated native browser: live account, caption and image",
+      "metrics": {
+        "reach": null,
+        "views": 1,
+        "reactions": null,
+        "comments": null,
+        "shares": null,
+        "profile_visits": null,
+        "qualified_enquiries": null,
+        "consultations": null,
+        "paid_projects": null,
+        "revenue_pkr": null
+      },
+      "metrics_note": "Initial publication snapshot only; null means unavailable or not assessed.",
+      "content_fingerprint": null,
+      "fingerprint_note": "Historical browser post was not a studio manifest. No byte-identical uploaded image hash is available. This URL record alone cannot block matching content in the delivery journal."
+    },
+    {
+      "platform": "linkedin",
+      "account_url": "https://www.linkedin.com/in/nazakat-ale/",
+      "state": "published",
+      "topic": "AI VIDEOS BAN RAHI HAIN… MONETIZE BHI HONGI?",
+      "public_post_url": "https://www.linkedin.com/feed/update/urn:li:activity:7519500732463722496/",
+      "published_at": null,
+      "observed_submit_click_at": "2026-10-24T01:51:16+05:00",
+      "verification_date_pkt": "2026-10-24",
+      "verification_method": "authenticated native browser: live account, caption and image",
+      "metrics": {
+        "reach": null,
+        "views": null,
+        "reactions": null,
+        "comments": null,
+        "shares": null,
+        "profile_visits": null,
+        "qualified_enquiries": null,
+        "consultations": null,
+        "paid_projects": null,
+        "revenue_pkr": null
+      },
+      "metrics_note": "Initial publication snapshot only; null means unavailable or not assessed.",
+      "content_fingerprint": null,
+      "fingerprint_note": "Historical browser post was not a studio manifest. No byte-identical uploaded image hash is available. This URL record alone cannot block matching content in the delivery journal."
+    }
+  ]
+}
