@@ -38,6 +38,9 @@ def prepare(root, destination, start):
         manifest_paths.append(manifest_path)
         if manifest_path.exists():
             manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+            if manifest.get('temporary_render_cleanup', {}).get('completed_at'):
+                # A published topic is not regenerated or recycled after cleanup.
+                continue
             for platform, post in manifest['platforms'].items():
                 validate_post(post, platform)
         else:
@@ -70,6 +73,11 @@ def prepare(root, destination, start):
                 post['validated_character_count'] = validate_post(post, platform)
                 post['word_count'] = len(caption.split())
                 manifest['platforms'][platform] = post
+            manifest['temporary_render_cleanup'] = {
+                'version': 1,
+                'files': [{'name': p.name, 'sha256': file_hash(p)} for p in images.values()],
+                'completed_at': None,
+            }
             atomic_json(manifest_path, manifest)
         for platform in PLATFORMS:
             post = manifest['platforms'][platform]
@@ -105,3 +113,4 @@ body{margin:0;background:#0f0f0f;color:#f7f5ef;font:16px/1.6 system-ui}header{pa
                 'topics': len(TOPICS), 'drafts': len(rows), 'manifests': [str(p) for p in manifest_paths],
                 'next_step': 'Review; publish only after separate platform approval. Never recycle this finite bank as new research.'})
     return manifest_paths
+
