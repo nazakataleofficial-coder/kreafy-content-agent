@@ -1,0 +1,23 @@
+name: Read existing KRF001 LinkedIn result
+on:
+  push:
+    branches: ['inspect/krf001-linkedin-result']
+permissions:
+  contents: read
+jobs:
+  read-existing-post-only:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Read known Buffer ID without creating a post
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os,json
+          from studio.delivery import graphql
+          q='query Existing($input: PostInput!) { post(input: $input) { id text status sentAt externalLink channel { service externalLink } assets { source } } }'
+          print(json.dumps(graphql(q,{'input':{'id':'6ae769288755094b82933b74'}},os.environ['BUFFER_ACCESS_TOKEN'])))
+          PY
