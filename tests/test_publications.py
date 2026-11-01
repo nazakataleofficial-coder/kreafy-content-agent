@@ -56,6 +56,12 @@ class PublicationTests(unittest.TestCase):
             self.record()
         self.assertFalse(self.journal.exists())
 
+    def test_linkedin_native_activity_and_buffer_ugcpost_urls(self):
+        for kind in ('activity', 'ugcPost'):
+            validate_url('linkedin', f'https://www.linkedin.com/feed/update/urn:li:{kind}:7522696681704988672')
+        with self.assertRaises(ValueError):
+            validate_url('linkedin', 'https://www.linkedin.com/feed/update/urn:li:unrelated:123')
+
     def test_reject_wrong_account_host_and_timestamp(self):
         for url in ['https://x.com/other/status/123', 'https://x.com.evil.org/Kreafyonline/status/123',
                     'https://user@x.com/Kreafyonline/status/123']:

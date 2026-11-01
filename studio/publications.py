@@ -36,7 +36,7 @@ def validate_url(platform, url):
     patterns = {
         'twitter': ('x.com', r'/Kreafyonline/status/[0-9]+/?'),
         'instagram': ('www.instagram.com', r'/(?:nazakataleofficial/)?p/[A-Za-z0-9_-]+/?'),
-        'linkedin': ('www.linkedin.com', r'/(?:feed/update/urn:li:activity:[0-9]+|posts/[A-Za-z0-9_-]+-activity-[0-9]+-[A-Za-z0-9_-]+)/?'),
+        'linkedin': ('www.linkedin.com', r'/(?:feed/update/urn:li:(?:activity|ugcPost):[0-9]+|posts/[A-Za-z0-9_-]+-activity-[0-9]+-[A-Za-z0-9_-]+)/?'),
         'facebook': ('www.facebook.com', r'/photo/'),
     }
     host, pattern = patterns[platform]
