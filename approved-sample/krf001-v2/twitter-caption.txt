@@ -1,0 +1,9 @@
+Login is not permission.
+Authentication: who are you?
+Authorization: what can you access?
+
+Learn AI app, SaaS & website building. Subscribe:
+https://www.youtube.com/@TheAleBuilds
+
+Need a business website or app? Visit:
+https://kreafy.online/

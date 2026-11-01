@@ -1,0 +1,37 @@
+name: Approved KRF001 sample only
+on:
+  push:
+    branches: ['publish/krf001-v2-approved']
+permissions:
+  contents: read
+concurrency:
+  group: approved-krf001-sample
+  cancel-in-progress: false
+jobs:
+  publish-exact-approved-sample:
+    if: github.event.created == true && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.11'
+      - name: Preflight all targets, then send this exact approved sample once
+        env:
+          KREAFY_PUBLISH_ENABLED: 'true'
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+          BUFFER_LINKEDIN_ID: ${{ secrets.BUFFER_LINKEDIN_ID }}
+          BUFFER_INSTAGRAM_ID: ${{ secrets.BUFFER_INSTAGRAM_ID }}
+          BUFFER_TWITTER_ID: ${{ secrets.BUFFER_TWITTER_ID }}
+        run: python -m scripts.publish_approved_sample
+      - name: Preserve receipts even when an action fails
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: krf001-sample-receipts-${{ github.run_id }}
+          path: sample-receipts/
+          retention-days: 90
+          if-no-files-found: ignore

@@ -1,0 +1,27 @@
+A working login screen does not prove your app has working access controls.
+
+For anyone building with AI, two similar-sounding terms deserve separate attention:
+
+Authentication verifies identity: who is this user?
+Authorization checks permission: what may this user access or do?
+
+Consider a simple online store. A customer can view their own private order. The store owner can manage orders for that store. Both may sign in, but their access should differ.
+
+The useful product question is not just “Can this person log in?” It is also “Which records and actions should this person have access to?”
+
+Before approving a feature, write down three things:
+1. The user or role involved.
+2. The information they should access.
+3. The actions they should be allowed to take.
+
+This makes the intended behaviour clearer for your developer, your AI coding assistant and your reviewers. It is a planning step, not proof that the implementation is secure.
+
+Which permission boundary matters most in your product: customer data, team access or admin actions?
+
+Learn to build apps, SaaS and websites with AI. Subscribe to TheAleBuilds on YouTube:
+https://www.youtube.com/@TheAleBuilds
+
+Need a website, app or AI automation for your business? Visit Kreafy:
+https://kreafy.online/
+
+#AIAppDevelopment #SaaS #AccessControl #TheAleBuilds

@@ -1,0 +1,16 @@
+Login ho gaya. Sab allowed? Zaroori nahi.
+
+Authentication = aap kaun hain?
+Authorization = kya karne ki ijazat hai?
+
+Customer apna order dekhe. Store owner apne store ke orders manage kare. Dono login hain, permissions alag.
+
+Swipe karke simple misaal samjhein. Aapki app mein kaun se roles honge?
+
+AI se apps, SaaS aur websites banana seekhein.
+YouTube par subscribe karein: @TheAleBuilds
+youtube.com/@TheAleBuilds
+
+Business ke liye website, app ya AI automation chahiye? Kreafy visit karein: kreafy.online
+
+#AISeApps #AppDevelopment #SaaSLearning #TheAleBuilds #Kreafy

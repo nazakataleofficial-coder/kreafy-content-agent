@@ -1,0 +1,100 @@
+{
+  "id": "KRF001-v2-approved",
+  "authorization": "User approved final poster/carousel and requested Buffer publication in this conversation; latest instruction: ok go on",
+  "platforms": {
+    "linkedin": {
+      "account_url": "https://www.linkedin.com/in/nazakat-ale/",
+      "caption": "A working login screen does not prove your app has working access controls.\n\nFor anyone building with AI, two similar-sounding terms deserve separate attention:\n\nAuthentication verifies identity: who is this user?\nAuthorization checks permission: what may this user access or do?\n\nConsider a simple online store. A customer can view their own private order. The store owner can manage orders for that store. Both may sign in, but their access should differ.\n\nThe useful product question is not just “Can this person log in?” It is also “Which records and actions should this person have access to?”\n\nBefore approving a feature, write down three things:\n1. The user or role involved.\n2. The information they should access.\n3. The actions they should be allowed to take.\n\nThis makes the intended behaviour clearer for your developer, your AI coding assistant and your reviewers. It is a planning step, not proof that the implementation is secure.\n\nWhich permission boundary matters most in your product: customer data, team access or admin actions?\n\nLearn to build apps, SaaS and websites with AI. Subscribe to TheAleBuilds on YouTube:\nhttps://www.youtube.com/@TheAleBuilds\n\nNeed a website, app or AI automation for your business? Visit Kreafy:\nhttps://kreafy.online/\n\n#AIAppDevelopment #SaaS #AccessControl #TheAleBuilds",
+      "sources": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      ],
+      "delivery_mode": "shareNow",
+      "assets": [
+        {
+          "type": "document",
+          "path": "approved-sample/krf001-v2/linkedin.pdf",
+          "sha256": "f6652032b37834246cf74929bb464419796828f2f35e33a59a44e8811c06300e",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/linkedin.pdf",
+          "title": "Authentication vs Authorization",
+          "thumbnail": {
+            "type": "image",
+            "path": "approved-sample/krf001-v2/slide-01.png",
+            "sha256": "c89573b8a9f4c2b5600835a66cc84a90960fda3296d9c8695822dc7cb6eabc07",
+            "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-01.png"
+          }
+        }
+      ],
+      "approval": {
+        "digest": "bb04588756366a798118ea5752076ad72bfa18a4805c48e0fd26160cc56140a0",
+        "approved_at": "2026-11-01T16:29:36.703816+00:00"
+      }
+    },
+    "instagram": {
+      "account_url": "https://www.instagram.com/nazakataleofficial/",
+      "caption": "Login ho gaya. Sab allowed? Zaroori nahi.\n\nAuthentication = aap kaun hain?\nAuthorization = kya karne ki ijazat hai?\n\nCustomer apna order dekhe. Store owner apne store ke orders manage kare. Dono login hain, permissions alag.\n\nSwipe karke simple misaal samjhein. Aapki app mein kaun se roles honge?\n\nAI se apps, SaaS aur websites banana seekhein.\nYouTube par subscribe karein: @TheAleBuilds\nyoutube.com/@TheAleBuilds\n\nBusiness ke liye website, app ya AI automation chahiye? Kreafy visit karein: kreafy.online\n\n#AISeApps #AppDevelopment #SaaSLearning #TheAleBuilds #Kreafy",
+      "sources": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      ],
+      "delivery_mode": "shareNow",
+      "assets": [
+        {
+          "type": "image",
+          "path": "approved-sample/krf001-v2/slide-01.png",
+          "sha256": "c89573b8a9f4c2b5600835a66cc84a90960fda3296d9c8695822dc7cb6eabc07",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-01.png"
+        },
+        {
+          "type": "image",
+          "path": "approved-sample/krf001-v2/slide-02.png",
+          "sha256": "0e6deeba733d96c3d4d133a4ea5df55a7b44039c7e653a4012b7c2fa9490d7a8",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-02.png"
+        },
+        {
+          "type": "image",
+          "path": "approved-sample/krf001-v2/slide-03.png",
+          "sha256": "7be30457b280b159dd1dc12c8407da1ac92998cffa16061644ccdcd67c843f29",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-03.png"
+        },
+        {
+          "type": "image",
+          "path": "approved-sample/krf001-v2/slide-04.png",
+          "sha256": "63044369b08ca5ec1f120bc9754adaaac3f05e9f5041f6612705f70d703f5326",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-04.png"
+        },
+        {
+          "type": "image",
+          "path": "approved-sample/krf001-v2/slide-05.png",
+          "sha256": "81cb09144b5100fbfb99e0a8080233c3a25b0a436fb6a01ee62c731218fd31e7",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-05.png"
+        }
+      ],
+      "approval": {
+        "digest": "d38c99c6bcfc9a5b107b3a8bc80a70e44dd42881efe4dd30a186f0e1398ea5b4",
+        "approved_at": "2026-11-01T16:29:36.708877+00:00"
+      }
+    },
+    "twitter": {
+      "account_url": "https://x.com/Kreafyonline",
+      "caption": "Login is not permission.\nAuthentication: who are you?\nAuthorization: what can you access?\n\nLearn AI app, SaaS & website building. Subscribe:\nhttps://www.youtube.com/@TheAleBuilds\n\nNeed a business website or app? Visit:\nhttps://kreafy.online/",
+      "sources": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      ],
+      "delivery_mode": "shareNow",
+      "assets": [
+        {
+          "type": "image",
+          "path": "approved-sample/krf001-v2/slide-04.png",
+          "sha256": "63044369b08ca5ec1f120bc9754adaaac3f05e9f5041f6612705f70d703f5326",
+          "url": "https://raw.githubusercontent.com/nazakataleofficial-coder/kreafy-content-agent/67043781227f07da14645880b5058c95f52451a3/approved-sample/krf001-v2/slide-04.png"
+        }
+      ],
+      "approval": {
+        "digest": "daa6eacdab9fbc7da375f8276570ac855f62130d468e38ff720b013bb5a13885",
+        "approved_at": "2026-11-01T16:29:36.710491+00:00"
+      }
+    }
+  }
+}
