@@ -34,6 +34,8 @@ class SafetyTests(unittest.TestCase):
 
     def transport(self, query, variables, token):
         self.calls.append(query)
+        if query.startswith('query DuplicateCheck'):
+            return {'posts': {'edges': [], 'pageInfo': {'hasNextPage': False, 'endCursor': None}}}
         if query.startswith('query'):
             return {'channels': [{'id': 'channel', 'service': 'twitter',
                     'externalLink': core.ACCOUNTS['twitter'], 'isDisconnected': False,

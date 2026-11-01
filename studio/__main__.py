@@ -42,11 +42,11 @@ def main():
     drive = commands.add_parser('import-drive')
     drive.add_argument('--folder', required=True)
     drive.add_argument('--out', default='studio-private/drive')
-    for command in ('validate', 'approve', 'queue'):
+    for command in ('validate', 'approve', 'preflight', 'queue', 'refresh'):
         sub = commands.add_parser(command)
         sub.add_argument('manifest')
         sub.add_argument('--platform', choices=PLATFORMS, required=True)
-        if command == 'queue':
+        if command in ('queue', 'refresh'):
             sub.add_argument('--journal', default='studio-private/delivery.sqlite3')
     args = parser.parse_args()
     if args.command == 'prepare':
@@ -84,7 +84,7 @@ def main():
         return
     manifest = json.loads(Path(args.manifest).read_text(encoding='utf-8'))
     post = manifest['platforms'][args.platform]
-    count = validate_post(post, args.platform)
+    count = validate_post(post, args.platform, check_assets=args.command != 'refresh')
     if args.command == 'record-publication':
         from studio.publications import record_publication
         receipt = record_publication(post, args.platform, args.journal, args.url,
@@ -103,6 +103,19 @@ def main():
                              os.environ.get('BUFFER_ORGANIZATION_ID', ''),
                              os.environ.get('BUFFER_ACCESS_TOKEN', ''))
         print(json.dumps(receipt, indent=2))
+    elif args.command == 'preflight':
+        from studio.delivery import preflight_post
+        payload = preflight_post(post, args.platform,
+                                 os.environ.get(f'BUFFER_{args.platform.upper()}_ID', ''),
+                                 os.environ.get('BUFFER_ORGANIZATION_ID', ''),
+                                 os.environ.get('BUFFER_ACCESS_TOKEN', ''))
+        print(json.dumps({'ready': True, 'platform': args.platform,
+                          'asset_count': len(payload['assets']), 'mode': payload['mode'],
+                          'note': 'Read-only checks passed. No post created.'}, indent=2))
+    elif args.command == 'refresh':
+        from studio.delivery import refresh_post
+        print(json.dumps(refresh_post(post, args.platform, args.journal,
+                                      os.environ.get('BUFFER_ACCESS_TOKEN', '')), indent=2))
 
 
 if __name__ == '__main__':
