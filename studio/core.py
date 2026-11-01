@@ -28,6 +28,53 @@ def file_hash(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def media_assets(post):
+    if 'assets' in post:
+        if any(k in post for k in ('image', 'image_sha256', 'public_image_url')):
+            raise ValueError('Use assets or the legacy image fields, not both')
+        assets = post['assets']
+        if not isinstance(assets, list) or not assets or not all(isinstance(a, dict) for a in assets):
+            raise ValueError('An ordered, non-empty asset list is required')
+        return assets
+    return [{'type': 'image', 'path': post.get('image'),
+             'sha256': post.get('image_sha256'), 'url': post.get('public_image_url')}]
+
+
+def validate_media(post, platform, check_files=True):
+    assets = media_assets(post)
+    kinds = [a.get('type') for a in assets]
+    if 'document' in kinds:
+        if platform != 'linkedin' or kinds != ['document']:
+            raise ValueError('A single PDF document is supported only on LinkedIn')
+        doc = assets[0]
+        if not isinstance(doc.get('title'), str) or not doc['title'].strip() or len(doc['title']) > 200:
+            raise ValueError('PDF document title is required (up to 200 characters)')
+        if not isinstance(doc.get('thumbnail'), dict):
+            raise ValueError('PDF requires an approved PNG thumbnail')
+        files = assets + [dict(doc['thumbnail'], type='image')]
+    else:
+        # Conservative application limits; never drop surplus slides silently.
+        if any(k != 'image' for k in kinds) or len(assets) > {'twitter': 4, 'instagram': 10, 'linkedin': 20, 'facebook': 10}[platform]:
+            raise ValueError('Unsupported media type or too many images for this platform')
+        files = assets
+    for asset in files:
+        if not isinstance(asset.get('sha256'), str) or not re.fullmatch(r'[0-9a-f]{64}', asset['sha256']):
+            raise ValueError('Every asset requires its SHA-256 checksum')
+        if not isinstance(asset.get('path'), str) or not asset['path']:
+            raise ValueError('Every asset requires its local path')
+        if check_files:
+            path = Path(asset['path'])
+            if not path.is_file() or file_hash(path) != asset['sha256']:
+                raise ValueError('Image or document missing or changed')
+            is_pdf = asset['type'] == 'document'
+            limit = (100 if is_pdf else 5 if platform == 'twitter' else 10) * 1024 * 1024
+            with path.open('rb') as stream:
+                header = stream.read(8)
+            if path.stat().st_size > limit or (not header.startswith(b'%PDF-') if is_pdf else header != b'\x89PNG\r\n\x1a\n'):
+                raise ValueError('Asset format or file size is unsupported')
+    return assets
+
+
 def x_weight(text):
     """Conservative upper bound: URLs 23, each non-ASCII code point two.
 
@@ -56,10 +103,8 @@ def validate_post(post, platform, check_assets=True):
     if not isinstance(sources, list) or not sources or not all(
             isinstance(s, str) and s.startswith('https://') for s in sources):
         raise ValueError('Original source URLs are required')
-    if check_assets:
-        path = Path(post['image'])
-        if not path.is_file() or file_hash(path) != post.get('image_sha256'):
-            raise ValueError('Image missing or changed')
+    if check_assets or 'assets' in post:
+        validate_media(post, platform, check_assets)
     return count
 
 

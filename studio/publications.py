@@ -6,14 +6,19 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from studio.core import ACCOUNTS, digest, require_approval, validate_post
+from studio.core import ACCOUNTS, digest, media_assets, require_approval, validate_post
 
 DEFAULT_HISTORY = Path(__file__).resolve().parents[1] / 'data/publications.json'
 
 
 def content_key(post):
+    assets = media_assets(post)
+    # Preserve old single-image journal keys, even after converting the manifest.
+    if len(assets) != 1 or assets[0]['type'] != 'image':
+        return digest({'account': post['account_url'], 'caption': post['caption'],
+                       'assets': [{'type': a['type'], 'sha256': a['sha256']} for a in assets]})
     return digest({'account': post['account_url'], 'caption': post['caption'],
-                   'image': post['image_sha256']})
+                   'image': assets[0]['sha256']})
 
 
 def timestamp(value):
@@ -30,8 +35,8 @@ def validate_url(platform, url):
     parsed = urlsplit(url)
     patterns = {
         'twitter': ('x.com', r'/Kreafyonline/status/[0-9]+/?'),
-        'instagram': ('www.instagram.com', r'/nazakataleofficial/p/[A-Za-z0-9_-]+/?'),
-        'linkedin': ('www.linkedin.com', r'/feed/update/urn:li:activity:[0-9]+/?'),
+        'instagram': ('www.instagram.com', r'/(?:nazakataleofficial/)?p/[A-Za-z0-9_-]+/?'),
+        'linkedin': ('www.linkedin.com', r'/(?:feed/update/urn:li:activity:[0-9]+|posts/[A-Za-z0-9_-]+-activity-[0-9]+-[A-Za-z0-9_-]+)/?'),
         'facebook': ('www.facebook.com', r'/photo/'),
     }
     host, pattern = patterns[platform]

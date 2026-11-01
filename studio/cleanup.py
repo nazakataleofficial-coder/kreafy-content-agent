@@ -50,6 +50,8 @@ def cleanup(root, journal, apply=False, at=None):
             posts = manifest['platforms']
             if set(posts) != set(PLATFORMS):
                 raise ValueError('All four platform manifests required')
+            if any('assets' in post for post in posts.values()):
+                raise ValueError('Carousel/PDF packs are retained; legacy cleanup does not delete them')
             eligible_at = []
             for platform in PLATFORMS:
                 post = posts[platform]
