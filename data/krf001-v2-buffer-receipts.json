@@ -1,0 +1,78 @@
+{
+  "sample_id": "KRF001-v2",
+  "verification": "Buffer API confirms sent, correct account/caption/media source URLs. Native visual inspection remains unavailable.",
+  "workflow_url": "https://github.com/nazakataleofficial-coder/kreafy-content-agent/actions/runs/41326950421",
+  "publications": [
+    {
+      "state": "provider_sent",
+      "platform": "linkedin",
+      "account_url": "https://www.linkedin.com/in/nazakat-ale/",
+      "provider_post_id": "6ae769288755094b82933b74",
+      "delivery_mode": "shareNow",
+      "public_post_url": null,
+      "published_at": null,
+      "queued_at": "2026-11-01T16:30:43.035796+00:00",
+      "provider_status": "sent",
+      "observed_at": "2026-11-01T16:33:52.431278+00:00",
+      "provider_content_matches": true,
+      "provider_post_url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7522696681704988672",
+      "provider_sent_at": "2026-11-01T16:30:54.673Z",
+      "metrics": null,
+      "verification_method": "buffer_api_only",
+      "note": "Buffer evidence only. Native account appearance has not been visually verified."
+    },
+    {
+      "state": "provider_sent",
+      "platform": "instagram",
+      "account_url": "https://www.instagram.com/nazakataleofficial/",
+      "delivery_mode": "shareNow",
+      "provider_post_id": "6ae769f7fa39ab5d4d8579bb",
+      "due_at": "2026-11-01T16:33:59.545Z",
+      "queued_at": "2026-11-01T16:34:09.751832+00:00",
+      "published_at": null,
+      "public_post_url": null,
+      "note": "Buffer evidence only. Native account appearance has not been visually verified.",
+      "provider_status": "sent",
+      "observed_at": "2026-11-01T16:34:40.384198+00:00",
+      "provider_content_matches": true,
+      "provider_post_url": "https://www.instagram.com/p/DfNLBRKFLh2/",
+      "provider_sent_at": "2026-11-01T16:34:32.684Z",
+      "metrics": null,
+      "verification_method": "buffer_api_only"
+    },
+    {
+      "state": "provider_sent",
+      "platform": "twitter",
+      "account_url": "https://x.com/Kreafyonline",
+      "delivery_mode": "shareNow",
+      "provider_post_id": "6ae76a218755094b8293aa78",
+      "due_at": "2026-11-01T16:34:41.843Z",
+      "queued_at": "2026-11-01T16:34:43.946240+00:00",
+      "published_at": null,
+      "public_post_url": null,
+      "note": "Buffer evidence only. Native account appearance has not been visually verified.",
+      "provider_status": "sent",
+      "observed_at": "2026-11-01T16:34:44.101045+00:00",
+      "provider_content_matches": true,
+      "provider_post_url": "https://twitter.com/Kreafyonline/status/2116931952246735161",
+      "provider_sent_at": "2026-11-01T16:34:43.156Z",
+      "metrics": null,
+      "verification_method": "buffer_api_only"
+    }
+  ],
+  "facebook": {
+    "status": "not_attempted",
+    "reason": "Personal/professional profile unsupported by Buffer; authenticated Chrome access unavailable."
+  },
+  "automation": {
+    "recurring_publishing": false,
+    "queue_refill": false
+  },
+  "metrics": {
+    "views": null,
+    "reactions": null,
+    "comments": null,
+    "shares": null,
+    "qualified_enquiries": null
+  }
+}
